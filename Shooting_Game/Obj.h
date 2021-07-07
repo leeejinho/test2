@@ -10,13 +10,13 @@ public:
 
 public:
 	virtual HRESULT Initialize()PURE;
-	virtual int Update()PURE;
-	virtual void Late_Update()PURE;
+	virtual int Update()		PURE;
+	virtual void Late_Update()	PURE;
 	virtual void Render(HDC _DC)PURE;
-	virtual void Release()PURE;
+	virtual void Release()		PURE;
 
 public:
-	INFO Get_Info() { return m_tInfo; }
+	const INFO	Get_Info()	const { return m_tInfo; }
 
 public:
 	void Set_Dead() { m_bDead = true; }

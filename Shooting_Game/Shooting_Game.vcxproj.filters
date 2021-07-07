@@ -43,6 +43,18 @@
     <Filter Include="소스 파일\98.Manager\CollisionMgr">
       <UniqueIdentifier>{f758c977-6bf1-4100-89be-928d69aaf3b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\00.Player">
+      <UniqueIdentifier>{c3751e3c-df9d-4d0f-9b6c-2f4d6c2cc07f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\00.Player\Skill">
+      <UniqueIdentifier>{8eb8c6cd-f76a-49cc-9936-4425861c4e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Obj\00.Player\Skill\Shield">
+      <UniqueIdentifier>{28d0a411-f01e-40d9-9eb4-88aa177aedc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\98.Manager\KeyMgr">
+      <UniqueIdentifier>{9e5762cb-e015-4dba-a5df-e251e51f3987}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,9 +93,6 @@
     <ClInclude Include="MainGame.h">
       <Filter>소스 파일\00.MainGaim</Filter>
     </ClInclude>
-    <ClInclude Include="Obj.h">
-      <Filter>소스 파일\01.Obj</Filter>
-    </ClInclude>
     <ClInclude Include="ObjMgr.h">
       <Filter>소스 파일\98.Manager\ObjMgr</Filter>
     </ClInclude>
@@ -99,8 +108,17 @@
     <ClInclude Include="CollisionMgr.h">
       <Filter>소스 파일\98.Manager\CollisionMgr</Filter>
     </ClInclude>
-    <ClInclude Include="test.h">
-      <Filter>소스 파일</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\01.Obj\00.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>소스 파일\01.Obj\00.Player\Skill\Shield</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>소스 파일\01.Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMgr.h">
+      <Filter>소스 파일\98.Manager\KeyMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -112,9 +130,6 @@
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
       <Filter>소스 파일\00.MainGaim</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj.cpp">
-      <Filter>소스 파일\01.Obj</Filter>
     </ClCompile>
     <ClCompile Include="ObjMgr.cpp">
       <Filter>소스 파일\98.Manager\ObjMgr</Filter>
@@ -130,6 +145,18 @@
     </ClCompile>
     <ClCompile Include="CollisionMgr.cpp">
       <Filter>소스 파일\98.Manager\CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\01.Obj\00.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>소스 파일\01.Obj\00.Player\Skill\Shield</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>소스 파일\01.Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMgr.cpp">
+      <Filter>소스 파일\98.Manager\KeyMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
