@@ -71,7 +71,7 @@ int CMonster::Create_Monster_Left()
 	D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
 
 	//matWorld = matScale * matRotZ * matTrans * matRelRotZ/* * matParentTrans*/;
-	if (m_bDiagonal)
+	if (m_bDiagonal)				// 대각선
 	{
 		matWorld = matTrans;
 		m_tInfo.vPos.x -= m_fSpeed;
@@ -84,7 +84,7 @@ int CMonster::Create_Monster_Left()
 	{
 			D3DXMatrixTranslation(&matParentTrans, m_fParentX, m_fParentY, 0.f);
 
-		if (m_bRotation)
+		if (m_bRotation)				// 회전
 		{
 			m_fParentX = 195.f;
 			m_fParentY = 300.f;
@@ -98,7 +98,7 @@ int CMonster::Create_Monster_Left()
 				m_tInfo.vPos = { 100.f, 0.f, 0.f };
 			}
 		}
-		else
+		else					// 회전후 올라감
 		{
 			m_tInfo.vPos = { 100.f, 0.f, 0.f };
 			matWorld = matTrans * matParentTrans;
@@ -122,7 +122,7 @@ int CMonster::Create_Monster_Right()
 	D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
 
 	//matWorld = matScale * matRotZ * matTrans * matRelRotZ/* * matParentTrans*/;
-	if (m_bDiagonal)
+	if (m_bDiagonal)				// 대각선
 	{
 		matWorld = matTrans;
 		m_tInfo.vPos.x += m_fSpeed;
@@ -135,7 +135,7 @@ int CMonster::Create_Monster_Right()
 	{
 		D3DXMatrixTranslation(&matParentTrans, m_fParentX, m_fParentY, 0.f);
 
-		if (m_bRotation)
+		if (m_bRotation)				// 회전
 		{
 			m_fParentX = 602.f;
 			m_fParentY = 300.f;
@@ -149,7 +149,7 @@ int CMonster::Create_Monster_Right()
 				m_tInfo.vPos = { -100.f, 0.f, 0.f };
 			}
 		}
-		else
+		else					// 회전후 올라감
 		{
 			m_tInfo.vPos = {- 100.f, 0.f, 0.f };
 			matWorld = matTrans * matParentTrans;
