@@ -27,10 +27,10 @@ public:
 	int Create_Monster_Right();
 
 private:
-	bool		m_bDiagonal;
-	bool		m_bRotation;
-	float		m_fParentX;
-	float		m_fParentY;
+	bool		m_bDiagonal;		// 대각선 
+	bool		m_bRotation;		// 회전
+	float		m_fParentX;			// 부모 x축
+	float		m_fParentY;			// 부모 y축
 
 	STATE		m_eCurState;
 };

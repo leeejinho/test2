@@ -52,6 +52,9 @@
     <Filter Include="소스 파일\98.Manager\KeyMgr">
       <UniqueIdentifier>{d7af34d2-420a-4280-ab09-cd1a337f22cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\01.Monster\00.Butterfly">
+      <UniqueIdentifier>{7412454d-f44c-47b1-a0e9-9baa65c416fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -117,6 +120,9 @@
     <ClInclude Include="KeyMgr.h">
       <Filter>소스 파일\98.Manager\KeyMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Butterfly.h">
+      <Filter>소스 파일\01.Obj\01.Monster\00.Butterfly</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shooting_Game.cpp">
@@ -154,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="KeyMgr.cpp">
       <Filter>소스 파일\98.Manager\KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterfly.cpp">
+      <Filter>소스 파일\01.Obj\01.Monster\00.Butterfly</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

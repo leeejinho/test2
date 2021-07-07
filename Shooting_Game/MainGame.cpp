@@ -3,6 +3,7 @@
 #include "Obj.h"
 #include "ObjMgr.h"
 #include "Monster.h"
+#include "Butterfly.h"
 
 CMainGame::CMainGame()
 {
@@ -25,6 +26,10 @@ void CMainGame::Initialize()
 	pObj = CAbstractFactory<CMonster>::Create();
 	static_cast<CMonster*>(pObj)->Set_State(CMonster::RIGHT);
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+
+	pObj = CAbstractFactory<CButterfly>::Create();
+	static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
 
 	CObjMgr::Get_Instance();
 }
