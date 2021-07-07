@@ -16,6 +16,7 @@ CPlayer::~CPlayer()
 
 HRESULT CPlayer::Initialize()
 {
+	int i = 0;
 	m_tInfo.vPos = { WINCX >> 1, WINCY - 50.f, 0.f };
 	m_tInfo.vDir = { 1.f, 0.f, 0.f };
 	m_tInfo.vSize = { 80.f, 80.f, 0.f };

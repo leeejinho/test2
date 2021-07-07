@@ -1,23 +1,8 @@
-﻿빌드 시작: 2021-07-07 오후 10:07:24
+﻿빌드 시작: 2021-07-07 오후 10:14:41
      1>2 노드의 "C:\Users\mingi\OneDrive\Documents\GitHub\test2\Shooting_Game\Shooting_Game.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"Debug\Shooting_Game.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
-         stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\Shooting_Game.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Bullet.cpp CollisionMgr.cpp KeyMgr.cpp MainGame.cpp Monster.cpp Obj.cpp ObjMgr.cpp Player.cpp ScrollMgr.cpp Shield.cpp Shooting_Game.cpp
-         Shooting_Game.cpp
-         Shield.cpp
-         ScrollMgr.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\Shooting_Game.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
          Player.cpp
-         ObjMgr.cpp
-         Obj.cpp
-         Monster.cpp
-         MainGame.cpp
-         KeyMgr.cpp
-         CollisionMgr.cpp
-         Bullet.cpp
-         코드를 생성하고 있습니다...
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\Shooting_Game.res" Shooting_Game.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\mingi\OneDrive\Documents\GitHub\test2\Debug\Shooting_Game.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\mingi\OneDrive\Documents\GitHub\test2\Debug\Shooting_Game.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\mingi\OneDrive\Documents\GitHub\test2\Debug\Shooting_Game.lib" /MACHINE:X86 Debug\Shooting_Game.res
          Debug\Bullet.obj
@@ -37,4 +22,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:02.48
+경과 시간: 00:00:01.07
