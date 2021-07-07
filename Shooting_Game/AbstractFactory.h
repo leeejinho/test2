@@ -1,0 +1,20 @@
+#pragma once
+
+
+#ifndef __ABSTRACTFACTORY_H__
+#define __ABSTRACTFACTORY_H__
+
+class CObj;
+template <typename T>
+class CAbstractFactory {
+public:
+	static CObj* Create() {
+		CObj* pObj = new T;
+		pObj->Initialize();
+
+		return pObj;
+	}
+	
+};
+#endif
+#pragma once
