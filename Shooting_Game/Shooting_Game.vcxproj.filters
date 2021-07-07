@@ -46,6 +46,9 @@
     <Filter Include="소스 파일\01.Obj\Player">
       <UniqueIdentifier>{c9872cda-b703-4559-8d63-a46fdf96f9a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\01.Obj\Player\Shield">
+      <UniqueIdentifier>{b7968303-afe0-4349-a309-2cd188c11b9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -105,6 +108,9 @@
     <ClInclude Include="Player.h">
       <Filter>소스 파일\01.Obj\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>소스 파일\01.Obj\Player\Shield</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shooting_Game.cpp">
@@ -136,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\01.Obj\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>소스 파일\01.Obj\Player\Shield</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
