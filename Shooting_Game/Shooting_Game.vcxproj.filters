@@ -117,6 +117,9 @@
     <ClInclude Include="KeyMgr.h">
       <Filter>소스 파일\98.Manager\KeyMgr</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterBullet.h">
+      <Filter>소스 파일\01.Obj\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shooting_Game.cpp">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="KeyMgr.cpp">
       <Filter>소스 파일\98.Manager\KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBullet.cpp">
+      <Filter>소스 파일\01.Obj\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
