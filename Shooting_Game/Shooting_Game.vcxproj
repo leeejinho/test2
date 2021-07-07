@@ -169,6 +169,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="Shooting_Game.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="Shooting_Game.cpp" />
     <ClCompile Include="stdafx.cpp">
