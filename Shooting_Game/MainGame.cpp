@@ -3,6 +3,7 @@
 #include "Obj.h"
 #include "ObjMgr.h"
 #include "Monster.h"
+#include "Player.h"
 
 CMainGame::CMainGame()
 {
@@ -25,6 +26,10 @@ void CMainGame::Initialize()
 	pObj = CAbstractFactory<CMonster>::Create();
 	static_cast<CMonster*>(pObj)->Set_State(CMonster::RIGHT);
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+
+	pObj = CAbstractFactory<CPlayer>::Create();
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::PLAYER);
+
 
 	CObjMgr::Get_Instance();
 }

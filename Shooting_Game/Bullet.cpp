@@ -14,10 +14,10 @@ CBullet::~CBullet()
 HRESULT CBullet::Initialize()
 {
 	m_tInfo.vPos = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos;
-	m_tInfo.vDir = { 0.f, 1.f, 0.f };
+	m_tInfo.vDir = { 0.f, -1.f, 0.f };
 	m_tInfo.vSize = { 10.f, 10.f, 0.f };
 
-	m_fSpeed = 5.f;
+	m_fSpeed = 10.f;
 
 	return S_OK;
 }
@@ -34,7 +34,7 @@ int CBullet::Update()
 
 void CBullet::Late_Update()
 {
-	if (m_tInfo.vPos.y < 0)
+	if (m_tInfo.vPos.y < -(m_tInfo.vSize.y * 0.5f) )
 		m_bDead = true;
 }
 
