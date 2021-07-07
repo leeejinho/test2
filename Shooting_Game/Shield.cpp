@@ -33,7 +33,7 @@ int CShield::Update()
 
 void CShield::Late_Update()
 {
-	m_tInfo.vPos = myTarget->Get_INFO().vPos;
+	m_tInfo.vPos = myTarget->Get_Info().vPos;
 }
 
 void CShield::Render(HDC _DC)
