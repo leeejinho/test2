@@ -99,6 +99,9 @@
     <ClInclude Include="CollisionMgr.h">
       <Filter>소스 파일\98.Manager\CollisionMgr</Filter>
     </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shooting_Game.cpp">
