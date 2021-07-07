@@ -63,7 +63,7 @@ void CButterfly::Release()
 
 int CButterfly::Create_Butterfly_Right()
 {
-	int iCount = 0;
+	D3DXMATRIX matParentTrans;
 	return 0;
 }
 
