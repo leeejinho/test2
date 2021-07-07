@@ -5,6 +5,6 @@
 
 namespace OBJID
 {
-	enum ID { ENEMY, BULLIT, PLAYER, MONSTER, END };
+	enum ID { ENEMY, BULLIT, PLAYER, MONSTER, SKILL, END };
 }
 #endif // !__ENUM_H__
