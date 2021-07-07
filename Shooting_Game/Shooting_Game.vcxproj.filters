@@ -49,6 +49,9 @@
     <Filter Include="소스 파일\01.Obj\Player\Shield">
       <UniqueIdentifier>{b7968303-afe0-4349-a309-2cd188c11b9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\98.Manager\KeyMgr">
+      <UniqueIdentifier>{d7af34d2-420a-4280-ab09-cd1a337f22cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -111,6 +114,9 @@
     <ClInclude Include="Shield.h">
       <Filter>소스 파일\01.Obj\Player\Shield</Filter>
     </ClInclude>
+    <ClInclude Include="KeyMgr.h">
+      <Filter>소스 파일\98.Manager\KeyMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shooting_Game.cpp">
@@ -145,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="Shield.cpp">
       <Filter>소스 파일\01.Obj\Player\Shield</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMgr.cpp">
+      <Filter>소스 파일\98.Manager\KeyMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
