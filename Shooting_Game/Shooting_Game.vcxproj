@@ -169,6 +169,7 @@
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterBullet.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="ObjMgr.h" />
     <ClInclude Include="Player.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MonsterBullet.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="Player.cpp" />
