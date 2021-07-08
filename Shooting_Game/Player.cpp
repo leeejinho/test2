@@ -3,7 +3,7 @@
 #include "Shield.h"
 #include "ObjMgr.h"
 #include "KeyMgr.h"
-
+#include "Bullet.h"
 
 CPlayer::CPlayer()
 {
@@ -97,6 +97,11 @@ void CPlayer::KeyCheck()
 
 	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 		Create_Shield();
+	if (CKeyMgr::Get_Instance()->Key_Down('A'))
+	{
+		CObj* pObj = CAbstractFactory<CBullet>::Create();
+		CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);
+	}
 
 }
 
