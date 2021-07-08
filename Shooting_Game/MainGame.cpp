@@ -3,7 +3,11 @@
 #include "Obj.h"
 #include "ObjMgr.h"
 #include "Monster.h"
+
 #include "Butterfly.h"
+=======
+#include "Player.h"
+
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount())
@@ -34,11 +38,18 @@ void CMainGame::Initialize()
 	//	static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
 	//	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
 
+
 	//	pObj = CAbstractFactory<CButterfly>::Create();
 	//	static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
 	//	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
 	//	m_dwTime = GetTickCount();
 	//}
+=======
+	pObj = CAbstractFactory<CPlayer>::Create();
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::PLAYER);
+
+
+
 	CObjMgr::Get_Instance();
 }
 
