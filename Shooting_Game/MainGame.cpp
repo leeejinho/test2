@@ -6,7 +6,9 @@
 
 #include "Butterfly.h"
 #include "Player.h"
+#include "StageMgr.h"
 
+#include <time.h>
 
 CMainGame::CMainGame()
 	: m_dwTime(GetTickCount())
@@ -22,6 +24,7 @@ CMainGame::~CMainGame()
 void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
+	srand(unsigned(time(NULL)));
 
 	/*CObj* pObj = CAbstractFactory<CMonster>::Create();
 	static_cast<CMonster*>(pObj)->Set_State(CMonster::LEFT);
@@ -45,8 +48,7 @@ void CMainGame::Initialize()
 	//}
 	CObj* pObj = CAbstractFactory<CPlayer>::Create();
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::PLAYER);
-
-
+	CStageMgr::Get_Instance()->Initialize();
 
 	CObjMgr::Get_Instance();
 }
@@ -55,19 +57,35 @@ void CMainGame::Update()
 {
 	static int iCount = 0;
 
-	if (iCount < 6)
+	if (iCount < 12)
 	{
 		if (m_dwTime + 500 < GetTickCount())
 		{
-			CObj* pObj = CAbstractFactory<CButterfly>::Create();
-			static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
-			CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
 
-			pObj = CAbstractFactory<CButterfly>::Create();
-			static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
-			CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
+			int x = rand() % X;
+			int y = rand() % Y;
 
-			++iCount;
+			if (!CStageMgr::Get_Instance()->Check_Monster(x, y))
+			{
+				CObj* pObj = CAbstractFactory<CButterfly>::Create();
+				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
+				static_cast<CButterfly*>(pObj)->Set_TargetPos(CStageMgr::Get_Instance()->GetVec(x, y));
+				CStageMgr::Get_Instance()->Set_Check(x, y);
+				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
+				++iCount;
+			}
+
+			x = rand() % X;
+			y = rand() % Y;
+			if (!CStageMgr::Get_Instance()->Check_Monster(x, y))
+			{
+				CObj* pObj = CAbstractFactory<CButterfly>::Create();
+				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
+				static_cast<CButterfly*>(pObj)->Set_TargetPos(CStageMgr::Get_Instance()->GetVec(x, y));
+				CStageMgr::Get_Instance()->Set_Check(x, y);
+				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
+				++iCount;
+			}
 
 			m_dwTime = GetTickCount();
 		}

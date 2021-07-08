@@ -26,11 +26,14 @@ public:
 	int Create_Butterfly_Right();
 	int Create_Butterfly_Left();
 
+	void Set_TargetPos(D3DXVECTOR3 m_vec) { m_pTargetPos = m_vec; }
+
 private:
 	STATE		m_eCurState;
 	bool		m_bDiagonal;		// 대각선
 	bool		m_bRotation;		// 회전
 	bool		m_bInitialize;
+	D3DXVECTOR3	m_pTargetPos;
 
 	float		m_fParentX;			// 부모 x축
 	float		m_fParentY;			// 부모 y축

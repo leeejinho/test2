@@ -21,15 +21,18 @@ public:
 public:
 	void Set_Pos(float _fX, float _fY) { m_tInfo.vPos.x = _fX; m_tInfo.vPos.y = _fY; }
 	void Set_Dead() { m_bDead = true; }
+	void Set_Target(CObj* _pTarget) { m_pTarget = _pTarget; }
 
 protected:
 	INFO	m_tInfo;
 	bool	m_bDead;
-
 	float		m_fSpeed;
-	D3DXVECTOR3 m_vQ[4];
-	D3DXVECTOR3 m_vP[4];
+	D3DXVECTOR3 m_vQ[5];
+	D3DXVECTOR3 m_vP[5];
 	float		m_fAngle;
+
+	CObj*		m_pTarget;
+
 };
 
 #endif // !__OBJ_H__

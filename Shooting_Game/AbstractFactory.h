@@ -22,6 +22,13 @@ public:
 
 		return pObj;
 	}	
+	static CObj* Create(CObj* pTarget) {
+		CObj* pObj = new T;
+		pObj->Set_Target(pTarget);
+		pObj->Initialize();
+
+		return pObj;
+	}
 };
 #endif
 #pragma once
