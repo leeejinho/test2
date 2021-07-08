@@ -17,6 +17,7 @@ public:
 
 private:
 	HDC		m_hDC;
+	DWORD	m_dwTime;
 };
 
 #endif // !__MAINGAME_H__

@@ -30,6 +30,8 @@ private:
 	STATE		m_eCurState;
 	bool		m_bDiagonal;		// 대각선
 	bool		m_bRotation;		// 회전
+	bool		m_bInitialize;
+
 	float		m_fParentX;			// 부모 x축
 	float		m_fParentY;			// 부모 y축
 };
