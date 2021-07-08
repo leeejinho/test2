@@ -27,8 +27,8 @@ void CCollisionMgr::Collision_Sphere(list<CObj*>& _Dst, list<CObj*>& _Src)
 	}
 }
 
-bool CCollisionMgr::Check_Sphere(CObj * _Dst, CObj * _Src)
-{
+bool CCollisionMgr::Check_Sphere(CObj * _Dst, CObj * _Src)		
+{			
 	float fX = abs(_Dst->Get_Info().vPos.x - _Src->Get_Info().vPos.x);
 	float fY = abs(_Dst->Get_Info().vPos.y - _Src->Get_Info().vPos.y);
 	float fDia = sqrtf(fX * fX + fY * fY);

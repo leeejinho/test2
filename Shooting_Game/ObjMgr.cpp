@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ObjMgr.h"
 #include "Obj.h"
+#include "CollisionMgr.h"
 
 
 CObjMgr* CObjMgr::m_pInstance = nullptr;
@@ -32,6 +33,9 @@ void CObjMgr::Update()
 				++iter;
 		}
 	}
+
+	CCollisionMgr::Collision_Sphere(m_listObj[OBJID::BULLIT], m_listObj[OBJID::MONSTER]);
+
 }
 
 void CObjMgr::Late_Update()
