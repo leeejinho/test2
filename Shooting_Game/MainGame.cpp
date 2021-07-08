@@ -5,7 +5,6 @@
 #include "Monster.h"
 
 #include "Butterfly.h"
-=======
 #include "Player.h"
 
 
@@ -44,8 +43,7 @@ void CMainGame::Initialize()
 	//	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
 	//	m_dwTime = GetTickCount();
 	//}
-=======
-	pObj = CAbstractFactory<CPlayer>::Create();
+	CObj* pObj = CAbstractFactory<CPlayer>::Create();
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::PLAYER);
 
 
