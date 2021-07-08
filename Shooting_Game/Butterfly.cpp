@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Butterfly.h"
 #include "StageMgr.h"
-#include "DeadEffect.h"
-#include "ObjMgr.h"
 
 
 CButterfly::CButterfly()
@@ -41,12 +39,7 @@ int CButterfly::Update()
 	int i = 0;
 	if (m_bDead)
 	{
-		while (i < 100)
-		{
-			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CDeadEffect>::Create(this), OBJID::EFFECT);
-			++i;
-		}
-		
+		Play_Dead_Effect(this);
 		return OBJ_DEAD;
 	}
 	if (m_eCurState == LEFT)

@@ -10,3 +10,4 @@
 #define OBJ_NOEVENT		0
 #define OBJ_DEAD		1
 #endif // !__DEFINE_H__
+

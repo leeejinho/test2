@@ -47,6 +47,12 @@
     <ClCompile Include="DeadEffect.cpp">
       <Filter>01.Obj\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="ZigZag.cpp">
+      <Filter>01.Obj\Monster\ZigZag</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle_Monster.cpp">
+      <Filter>01.Obj\Monster\Circle_Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -122,6 +128,12 @@
     <ClInclude Include="DeadEffect.h">
       <Filter>01.Obj\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="ZigZag.h">
+      <Filter>01.Obj\Monster\ZigZag</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle_Monster.h">
+      <Filter>01.Obj\Monster\Circle_Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Shooting_Game.ico">
@@ -176,6 +188,12 @@
     </Filter>
     <Filter Include="01.Obj\Effect">
       <UniqueIdentifier>{33301309-7708-4601-a9bc-3a4916b22825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Monster\ZigZag">
+      <UniqueIdentifier>{a0c7ea58-5ece-4a97-9d3c-6e7f3bf3d07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Monster\Circle_Monster">
+      <UniqueIdentifier>{5a2cd437-4b9f-4af9-b788-69c486fa47e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
