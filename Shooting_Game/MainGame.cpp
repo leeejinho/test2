@@ -3,9 +3,14 @@
 #include "Obj.h"
 #include "ObjMgr.h"
 #include "Monster.h"
+
+#include "Butterfly.h"
+=======
 #include "Player.h"
 
+
 CMainGame::CMainGame()
+	: m_dwTime(GetTickCount())
 {
 }
 
@@ -19,16 +24,30 @@ void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 
-	CObj* pObj = CAbstractFactory<CMonster>::Create();
+	/*CObj* pObj = CAbstractFactory<CMonster>::Create();
 	static_cast<CMonster*>(pObj)->Set_State(CMonster::LEFT);
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
 
 	pObj = CAbstractFactory<CMonster>::Create();
 	static_cast<CMonster*>(pObj)->Set_State(CMonster::RIGHT);
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);*/
 
+	//if (m_dwTime + 100 < GetTickCount())
+	//{
+	//	CObj* pObj = CAbstractFactory<CButterfly>::Create();
+	//	static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
+	//	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
+
+
+	//	pObj = CAbstractFactory<CButterfly>::Create();
+	//	static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
+	//	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
+	//	m_dwTime = GetTickCount();
+	//}
+=======
 	pObj = CAbstractFactory<CPlayer>::Create();
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::PLAYER);
+
 
 
 	CObjMgr::Get_Instance();
@@ -36,6 +55,26 @@ void CMainGame::Initialize()
 
 void CMainGame::Update()
 {
+	static int iCount = 0;
+
+	if (iCount < 6)
+	{
+		if (m_dwTime + 500 < GetTickCount())
+		{
+			CObj* pObj = CAbstractFactory<CButterfly>::Create();
+			static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
+			CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
+
+			pObj = CAbstractFactory<CButterfly>::Create();
+			static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
+			CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
+
+			++iCount;
+
+			m_dwTime = GetTickCount();
+		}
+
+	}
 	CObjMgr::Get_Instance()->Update();
 }
 
