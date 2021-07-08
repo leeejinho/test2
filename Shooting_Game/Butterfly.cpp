@@ -1,10 +1,15 @@
 #include "stdafx.h"
 #include "Butterfly.h"
+#include "StageMgr.h"
+#include "DeadEffect.h"
+#include "ObjMgr.h"
 
 
 CButterfly::CButterfly()
 	:m_eCurState(END), m_bDiagonal(true), m_bRotation(true), m_fParentX(0.f), m_fParentY(0.f), m_bInitialize(true)
+	
 {
+	ZeroMemory(&m_pTargetPos, sizeof(D3DXVECTOR3));
 }
 
 
@@ -24,6 +29,7 @@ HRESULT CButterfly::Initialize()
 	m_vP[2] = { m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 
+	m_vP[4] = { 0.f, 0.f, 0.f };
 
 	m_fSpeed = 2.f;
 
@@ -32,9 +38,17 @@ HRESULT CButterfly::Initialize()
 
 int CButterfly::Update()
 {
+	int i = 0;
 	if (m_bDead)
+	{
+		while (i < 100)
+		{
+			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CDeadEffect>::Create(this), OBJID::EFFECT);
+			++i;
+		}
+		
 		return OBJ_DEAD;
-
+	}
 	if (m_eCurState == LEFT)
 		Create_Butterfly_Left();
 	if (m_eCurState == RIGHT)
@@ -97,6 +111,9 @@ int CButterfly::Create_Butterfly_Right()
 		{
 			m_fParentX = 700.f;
 			m_fParentY = 350.f;
+			if(m_vP[4].x == 0)
+			m_vP[4] = m_tInfo.vPos;
+			
 			m_tInfo.vPos = { 50.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle < 540.f)
@@ -104,20 +121,32 @@ int CButterfly::Create_Butterfly_Right()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos = { -50.f, 0.f, 0.f };
+				m_tInfo.vPos = m_vP[4];
 			}
 		}
 		else					// 회전후 올라감
 		{
-			m_tInfo.vPos = { -50.f, 0.f, 0.f };
-			matWorld = matTrans * matParentTrans;
-			if (m_fParentY >= 50.f)
-				m_fParentY -= m_fSpeed;
+			matWorld = matTrans;
+			if (m_tInfo.vPos.y >= 250.f)
+				m_tInfo.vPos.y -= m_fSpeed;
+
+			else
+			{
+				m_tInfo.vDir = m_pTargetPos - m_tInfo.vPos;
+				float fDist = D3DXVec3Length(&m_tInfo.vDir);
+				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+
+				if (fDist > 1.f)
+					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+
+			}
 		}
 	}
 
 	for (int i = 0; i < 4; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
+
+	
 
 	return 0;
 }
@@ -151,6 +180,8 @@ int CButterfly::Create_Butterfly_Left()
 		{
 			m_fParentX = 100.f;
 			m_fParentY = 350.f;
+			if (m_vP[4].x == 0)
+				m_vP[4] = m_tInfo.vPos;
 			m_tInfo.vPos = { -50.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle > -180.f)
@@ -158,15 +189,25 @@ int CButterfly::Create_Butterfly_Left()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos = { 50.f, 0.f, 0.f };
+				m_tInfo.vPos = m_vP[4];
 			}
 		}
 		else					// 회전후 올라감
 		{
-			m_tInfo.vPos = { 50.f, 0.f, 0.f };
-			matWorld = matTrans * matParentTrans;
-			if (m_fParentY >= 50.f)
-				m_fParentY -= m_fSpeed;
+			matWorld = matTrans;
+			if (m_tInfo.vPos.y >= 250.f)
+				m_tInfo.vPos.y -= m_fSpeed;
+
+			else
+			{
+				m_tInfo.vDir = m_pTargetPos - m_tInfo.vPos;
+				float fDist = D3DXVec3Length(&m_tInfo.vDir);
+				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+
+				if (fDist > 2.f)
+					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+
+			}
 		}
 	}
 

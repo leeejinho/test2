@@ -1,5 +1,7 @@
 #pragma once
 #include "Obj.h"
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
 class CPlayer :
 	public CObj
 {
@@ -17,14 +19,23 @@ public:
 
 
 private:
+	D3DXMATRIX matScale, matRotZ, matTrans, matWorld;
 	void WriteMatrix();
 	void KeyCheck();
 	void OffSet();
-	
+
+
+private:
+	bool isBomb;
+	float fScaleX, fScaleY;
 
 private:
 	void Create_Shield();
+	void Create_Bullet();
+	void myBombTest();
 
 
 };
+
+#endif //__PLAYER_H__
 

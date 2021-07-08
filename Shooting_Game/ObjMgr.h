@@ -22,6 +22,7 @@ public:
 
 public:
 	CObj* Get_Player() { return m_listObj[OBJID::PLAYER].front(); }
+	list<CObj*>	Get_List(OBJID::ID _eID) { return m_listObj[_eID]; }
 
 public:
 	static CObjMgr* Get_Instance()

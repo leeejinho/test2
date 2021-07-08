@@ -20,14 +20,8 @@
     <ClCompile Include="Monster.cpp">
       <Filter>01.Obj\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>01.Obj\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="MonsterBullet.cpp">
-      <Filter>01.Obj\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Shield.cpp">
-      <Filter>01.Obj\Shield</Filter>
+      <Filter>01.Obj\Player\Shield</Filter>
     </ClCompile>
     <ClCompile Include="ObjMgr.cpp">
       <Filter>98.Manager\ObjMgr</Filter>
@@ -40,6 +34,18 @@
     </ClCompile>
     <ClCompile Include="ScrollMgr.cpp">
       <Filter>98.Manager\ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBullet.cpp">
+      <Filter>01.Obj\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>01.Obj\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="StageMgr.cpp">
+      <Filter>98.Manager\StageMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadEffect.cpp">
+      <Filter>01.Obj\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,14 +95,8 @@
     <ClInclude Include="Monster.h">
       <Filter>01.Obj\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>01.Obj\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterBullet.h">
-      <Filter>01.Obj\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Shield.h">
-      <Filter>01.Obj\Shield</Filter>
+      <Filter>01.Obj\Player\Shield</Filter>
     </ClInclude>
     <ClInclude Include="ObjMgr.h">
       <Filter>98.Manager\ObjMgr</Filter>
@@ -109,6 +109,18 @@
     </ClInclude>
     <ClInclude Include="ScrollMgr.h">
       <Filter>98.Manager\ScrollMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBullet.h">
+      <Filter>01.Obj\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>01.Obj\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="StageMgr.h">
+      <Filter>98.Manager\StageMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadEffect.h">
+      <Filter>01.Obj\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +156,6 @@
     <Filter Include="01.Obj\Bullet">
       <UniqueIdentifier>{8ba351da-8ac5-4a8d-b029-ca094a0ec0c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Obj\Shield">
-      <UniqueIdentifier>{b1211d51-e275-4fcb-8af1-4b8b59cfa925}</UniqueIdentifier>
-    </Filter>
     <Filter Include="98.Manager\ObjMgr">
       <UniqueIdentifier>{133d39a6-7662-40e3-bba4-883f2a3360ca}</UniqueIdentifier>
     </Filter>
@@ -158,6 +167,15 @@
     </Filter>
     <Filter Include="98.Manager\ScrollMgr">
       <UniqueIdentifier>{da373b6f-ab0f-4ad7-9135-bc19b89e542a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Manager\StageMgr">
+      <UniqueIdentifier>{4cffb54e-6fce-4639-bb28-d64e23908521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Player\Shield">
+      <UniqueIdentifier>{b1211d51-e275-4fcb-8af1-4b8b59cfa925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Effect">
+      <UniqueIdentifier>{33301309-7708-4601-a9bc-3a4916b22825}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
