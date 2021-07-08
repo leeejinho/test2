@@ -112,7 +112,7 @@ int CButterfly::Create_Butterfly_Right()
 			m_fParentX = 700.f;
 			m_fParentY = 350.f;
 			if(m_vP[4].x == 0)
-			m_vP[4] = m_tInfo.vPos;
+				m_vP[4] = m_tInfo.vPos;
 			
 			m_tInfo.vPos = { 50.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
