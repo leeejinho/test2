@@ -5,7 +5,7 @@
 #include "DeadEffect.h"
 
 CMonster::CMonster()
-	: m_bDiagonal(true), m_bRotation(true), m_fParentX(0.f), m_fParentY(0.f), m_eCurState(END)
+	: m_bDiagonal(true), m_bRotation(true), m_fParentX(0.f), m_fParentY(0.f), m_eCurState(END), m_dwDescent(0), m_bStop(false), m_bDescentRot(true)
 {
 }
 
@@ -37,19 +37,19 @@ int CMonster::Update()
 	int i = 0;
 	if (m_bDead)
 	{
-		while (i < 100)
-		{
-			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CDeadEffect>::Create(this), OBJID::EFFECT);
-			++i;
-		}
-
+		Play_Dead_Effect(this);
 		return OBJ_DEAD;
 	}
 
-	if(m_eCurState == LEFT)
-		Create_Monster_Left();
-	if(m_eCurState == RIGHT)
-		Create_Monster_Right();
+	if (!m_bStop)
+	{
+		if (m_eCurState == LEFT)
+			Create_Monster_Left();
+		if (m_eCurState == RIGHT)
+			Create_Monster_Right();
+	}
+	else
+		Monster_Descent();
 
 	return OBJ_NOEVENT;
 }
@@ -60,12 +60,19 @@ void CMonster::Late_Update()
 
 void CMonster::Render(HDC _DC)
 {
-	MoveToEx(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y, nullptr);
+	/*MoveToEx(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y, nullptr);
 
 	for (int i = 1; i < 4; ++i)
 		LineTo(_DC, (int)m_vQ[i].x, (int)m_vQ[i].y);
-	LineTo(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y);
+	LineTo(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y);*/
+	
+	MoveToEx(_DC, (int)m_vQ[4].x, (int)m_vQ[4].y, nullptr);
 
+	LineTo(_DC, (int)m_vQ[0].x, (int)m_vQ[0].y);
+	LineTo(_DC, (int)m_vQ[3].x, (int)m_vQ[3].y);
+	LineTo(_DC, (int)m_vQ[1].x, (int)m_vQ[1].y);
+	LineTo(_DC, (int)m_vQ[2].x, (int)m_vQ[2].y);
+	LineTo(_DC, (int)m_vQ[4].x, (int)m_vQ[4].y);
 
 }
 
@@ -100,8 +107,8 @@ int CMonster::Create_Monster_Left()
 		{
 			m_fParentX = 195.f;
 			m_fParentY = 300.f;
-			if (m_vP[4].x == 0)
-				m_vP[4] = m_tInfo.vPos;
+			//if (m_vP[4].x == 0)
+				//m_vP[4] = m_tInfo.vPos;
 			m_tInfo.vPos = { -100.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle > -180.f)
@@ -109,9 +116,9 @@ int CMonster::Create_Monster_Left()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos.x = m_vP[4].x + 195.f;
-				m_tInfo.vPos.y = m_vP[4].y ;
-				m_tInfo.vPos.z = m_vP[4].z ;
+				m_tInfo.vPos.x = m_vQ[4].x;
+				m_tInfo.vPos.y = m_vQ[4].y;
+				m_tInfo.vPos.z = m_vQ[4].z;
 			}
 			
 		}
@@ -128,11 +135,18 @@ int CMonster::Create_Monster_Left()
 
 				if (fDist > 1.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+				else
+				{
+					m_tInfo.vPos = m_pTargetPos;
+					m_bStop = true;
+					m_fAngle = 0.f;
+					m_dwDescent = GetTickCount();
+				}
 			}
 		}
 	}
 
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 5; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
 	//CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
 	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);
@@ -167,8 +181,8 @@ int CMonster::Create_Monster_Right()
 		{
 			m_fParentX = 602.f;
 			m_fParentY = 300.f;
-			if (m_vP[4].x == 0)
-				m_vP[4] = m_tInfo.vPos;
+			//if (m_vP[4].x == 0)
+				//m_vP[4] = m_tInfo.vPos;
 			m_tInfo.vPos = { 100.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle < 180.f)
@@ -176,9 +190,9 @@ int CMonster::Create_Monster_Right()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos.x = m_vP[4].x - 195.f;
-				m_tInfo.vPos.y = m_vP[4].y;
-				m_tInfo.vPos.z = m_vP[4].z;
+				m_tInfo.vPos.x = m_vQ[4].x;
+				m_tInfo.vPos.y = m_vQ[4].y;
+				m_tInfo.vPos.z = m_vQ[4].z;
 			}
 		}
 		else					// 회전후 올라감
@@ -194,13 +208,73 @@ int CMonster::Create_Monster_Right()
 
 				if (fDist > 1.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+				else
+				{
+					m_tInfo.vPos = m_pTargetPos;
+					m_bStop = true;
+					m_fAngle = 0.f;
+					m_dwDescent = GetTickCount();
+				}
 			}
 		}
 	}
 
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 5; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
 
 	return 0;
+}
+
+void CMonster::Monster_Descent()
+{
+	D3DXMATRIX matParentTrans;
+	D3DXMATRIX matTrans, matRelRotZ, matWorld;
+	int Delay = 5000;
+
+	if (m_dwDescent + Delay < GetTickCount())
+	{
+		if (m_bDescentRot)
+		{
+			m_fAngle += 2.f;
+			if (m_tInfo.vPos.x < (WINCX >> 1))
+			{
+				D3DXMatrixTranslation(&matTrans, 50.f, 0.f, 0.f);
+				D3DXMatrixTranslation(&matParentTrans, m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y, 0.f);
+				D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(-m_fAngle));
+			}
+			else
+			{
+				D3DXMatrixTranslation(&matTrans, -50.f, 0.f, 0.f);
+				D3DXMatrixTranslation(&matParentTrans, m_tInfo.vPos.x + 50.f, m_tInfo.vPos.y, 0.f);
+				D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
+			}
+			matWorld = matTrans * matRelRotZ * matParentTrans;
+
+			if (m_fAngle > 180)
+			{
+				m_tInfo.vPos = m_vQ[4];
+				m_tInfo.vDir = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos - m_vQ[4];
+				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+				m_bDescentRot = !m_bDescentRot;
+			}
+		}
+		else
+		{
+			m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+			D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
+			matWorld = matTrans;
+		}
+	}
+	else
+	{
+		D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
+		matWorld = matTrans;
+	}
+
+	for (int i = 0; i < 5; ++i)
+		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
+
+	if (m_tInfo.vPos.y > WINCY + 200)
+		m_bDead = true;
 }
 

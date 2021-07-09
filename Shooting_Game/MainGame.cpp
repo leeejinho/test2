@@ -44,23 +44,23 @@ void CMainGame::Initialize()
 	CStageMgr::Get_Instance()->Initialize();
 
 	// CircleMonster Ȯ��
-	pObj = CAbstractFactory<CCircle_Monster>::Create();
+	/*pObj = CAbstractFactory<CCircle_Monster>::Create();
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
 
 	pObj = CAbstractFactory<CCircle_Monster>::Create_UnIntialize();
 	static_cast<CCircle_Monster*>(pObj)->Set_Left();
 	pObj->Initialize();
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	*/
 
 
 	// ������ ����
-	pObj = CAbstractFactory<CZigZag>::Create_UnIntialize();
-	static_cast<CZigZag*>(pObj)->Set_Left();					//����� �⺻ �����
-	pObj->Initialize();
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag ���� Ȯ�ο�
+	//pObj = CAbstractFactory<CZigZag>::Create_UnIntialize();
+	//static_cast<CZigZag*>(pObj)->Set_Left();					//����� �⺻ �����
+	//pObj->Initialize();
+	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag ���� Ȯ�ο�
 
-	pObj = CAbstractFactory<CZigZag>::Create();
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag ���� Ȯ�ο�
+	//pObj = CAbstractFactory<CZigZag>::Create();
+	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag ���� Ȯ�ο�
 
 
 	CObjMgr::Get_Instance();

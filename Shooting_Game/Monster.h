@@ -26,9 +26,13 @@ public:
 public:
 	int Create_Monster_Left();
 	int Create_Monster_Right();
-
+	void Monster_Descent();
 
 private:
+	DWORD		m_dwDescent;
+	bool		m_bDescentRot;
+	bool		m_bStop;
+
 	bool		m_bDiagonal;		// 대각선 
 	bool		m_bRotation;		// 회전
 	float		m_fParentX;			// 부모 x축
