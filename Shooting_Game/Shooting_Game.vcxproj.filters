@@ -14,12 +14,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>01.Obj\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Butterfly.cpp">
-      <Filter>01.Obj\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>01.Obj\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="Shield.cpp">
       <Filter>01.Obj\Player\Shield</Filter>
     </ClCompile>
@@ -52,6 +46,12 @@
     </ClCompile>
     <ClCompile Include="Circle_Monster.cpp">
       <Filter>01.Obj\Monster\Circle_Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Butterfly.cpp">
+      <Filter>01.Obj\Monster\Butterfly</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>01.Obj\Monster\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,12 +95,6 @@
     <ClInclude Include="Player.h">
       <Filter>01.Obj\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Butterfly.h">
-      <Filter>01.Obj\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>01.Obj\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="Shield.h">
       <Filter>01.Obj\Player\Shield</Filter>
     </ClInclude>
@@ -133,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="Circle_Monster.h">
       <Filter>01.Obj\Monster\Circle_Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterfly.h">
+      <Filter>01.Obj\Monster\Butterfly</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>01.Obj\Monster\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +194,12 @@
     </Filter>
     <Filter Include="01.Obj\Monster\Circle_Monster">
       <UniqueIdentifier>{5a2cd437-4b9f-4af9-b788-69c486fa47e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Monster\Butterfly">
+      <UniqueIdentifier>{781b822f-5590-40ad-a6de-a1c48056962a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Monster\Monster">
+      <UniqueIdentifier>{cda7f070-e6b6-4b47-971d-d6959ec34912}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
