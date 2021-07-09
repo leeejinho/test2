@@ -13,12 +13,15 @@ CMonsterBullet::~CMonsterBullet()
 
 HRESULT CMonsterBullet::Initialize()
 {
-	m_tInfo.vDir = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos - m_tInfo.vPos;
+	if (!CObjMgr::Get_Instance()->Get_List(OBJID::PLAYER).empty())
+		m_tInfo.vDir = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos - m_tInfo.vPos;
+	else
+		m_tInfo.vDir = { 0.f, 1.f, 0.f };
+
 	D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 	m_tInfo.vSize = { 10.f, 10.f, 0.f };
 
 	m_fSpeed = 5.f;
-
 	
 
 	return S_OK;

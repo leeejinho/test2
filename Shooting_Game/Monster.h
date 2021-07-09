@@ -39,7 +39,6 @@ private:
 	bool		m_bRotation;		// 회전
 	float		m_fParentX;			// 부모 x축
 	float		m_fParentY;			// 부모 y축
-	bool		m_bStop;
 	D3DXVECTOR3	m_pTargetPos;
 
 	STATE		m_eCurState;
