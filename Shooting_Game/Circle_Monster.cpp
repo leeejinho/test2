@@ -97,6 +97,8 @@ void CCircle_Monster::myPattern()
 			D3DXMatrixTranslation(&matParentTrans, 300.f, 200.f, 0.f);
 		else
 			D3DXMatrixTranslation(&matParentTrans, 300.f, 100.f + 100.f * RotateCnt, 0.f);	
+
+
 		D3DXMatrixTranslation(&matTrans, 0, -50.f, 0.f);
 		D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
 

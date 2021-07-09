@@ -53,13 +53,13 @@ void CMainGame::Initialize()
 
 
 	// 지그재그 몬스터
-	//pObj = CAbstractFactory<CZigZag>::Create_UnIntialize();
-	//static_cast<CZigZag*>(pObj)->Set_Left();					//없으면 기본 오른쪽
-	//pObj->Initialize();
-	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag 몬스터 확인용
+	pObj = CAbstractFactory<CZigZag>::Create_UnIntialize();
+	static_cast<CZigZag*>(pObj)->Set_Left();					//없으면 기본 오른쪽
+	pObj->Initialize();
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag 몬스터 확인용
 
-	//pObj = CAbstractFactory<CZigZag>::Create();
-	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag 몬스터 확인용
+	pObj = CAbstractFactory<CZigZag>::Create();
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag 몬스터 확인용
 
 
 	CObjMgr::Get_Instance();
