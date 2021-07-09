@@ -36,8 +36,6 @@ void CMainGame::Initialize()
 
 
 
-
-
 	CObjMgr::Get_Instance();
 }
 

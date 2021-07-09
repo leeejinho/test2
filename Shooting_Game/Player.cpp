@@ -30,16 +30,23 @@ HRESULT CPlayer::Initialize()
 	m_vP[1] = { m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[2] = { m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
+	m_vP[4] = { 0.f, 0.f, 0.f };
 
 	return S_OK;
 }
 
 int CPlayer::Update()
 {
+	if (m_bDead)
+	{
+		Play_Dead_Effect(this);
+		return OBJ_DEAD;
+	}
+
 	KeyCheck();
 	OffSet();
 	WriteMatrix();
-	return 0;
+	return OBJ_NOEVENT;
 }
 
 void CPlayer::Late_Update()
@@ -72,7 +79,7 @@ void CPlayer::WriteMatrix()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	matWorld = matScale * matRotZ * matTrans;
 
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 5; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
 }
 

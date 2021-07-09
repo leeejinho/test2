@@ -16,7 +16,7 @@ HRESULT CDeadEffect::Initialize()
 {
 	dwTime = GetTickCount();
 	
-	m_tInfo.vPos = m_pTarget->Get_Info().vPos;
+	m_tInfo.vPos = m_pTarget->Get_Pos();
 	m_tInfo.vSize = { 5.f, 5.f, 0.f };
 
 	m_fSpeed = 1.f;

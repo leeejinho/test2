@@ -26,13 +26,20 @@ public:
 public:
 	int Create_Monster_Left();
 	int Create_Monster_Right();
+	void Monster_Descent();
 
 
 private:
-	bool		m_bDiagonal;		// ´ë°¢¼± 
-	bool		m_bRotation;		// È¸Àü
-	float		m_fParentX;			// ºÎ¸ğ xÃà
-	float		m_fParentY;			// ºÎ¸ğ yÃà
+	DWORD		m_dwDescent;
+	bool		m_bDescentRot;
+	bool		m_bStop;
+
+
+	bool		m_bDiagonal;		// ëŒ€ê°ì„  
+	bool		m_bRotation;		// íšŒì „
+	float		m_fParentX;			// ë¶€ëª¨ xì¶•
+	float		m_fParentY;			// ë¶€ëª¨ yì¶•
+	bool		m_bStop;
 	D3DXVECTOR3	m_pTargetPos;
 
 	STATE		m_eCurState;

@@ -32,12 +32,12 @@ public:
 private:
 	DWORD		m_dwDescent;
 	bool		m_bDescentRot;
+	bool		m_bStop;
 
 	STATE		m_eCurState;
 	bool		m_bDiagonal;		// 대각선
 	bool		m_bRotation;		// 회전
 	bool		m_bInitialize;
-	bool		m_bStop;
 	D3DXVECTOR3	m_pTargetPos;
 
 	float		m_fParentX;			// 부모 x축

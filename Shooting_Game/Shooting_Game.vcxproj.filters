@@ -19,6 +19,8 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>01.Obj\Monster</Filter>
+    <ClCompile Include="Shield.cpp">
+      <Filter>01.Obj\Player\Shield</Filter>
     </ClCompile>
     <ClCompile Include="ObjMgr.cpp">
       <Filter>98.Manager\ObjMgr</Filter>
@@ -52,6 +54,11 @@
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>01.Obj\Player\Bomb</Filter>
+    <ClCompile Include="Butterfly.cpp">
+      <Filter>01.Obj\Monster\Butterfly</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>01.Obj\Monster\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +107,8 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>01.Obj\Monster</Filter>
+    <ClInclude Include="Shield.h">
+      <Filter>01.Obj\Player\Shield</Filter>
     </ClInclude>
     <ClInclude Include="ObjMgr.h">
       <Filter>98.Manager\ObjMgr</Filter>
@@ -133,6 +142,11 @@
     </ClInclude>
     <ClInclude Include="StageMgr.h">
       <Filter>98.Manager\StageMgr</Filter>
+    <ClInclude Include="Butterfly.h">
+      <Filter>01.Obj\Monster\Butterfly</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>01.Obj\Monster\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +208,11 @@
     </Filter>
     <Filter Include="01.Obj\Player\Bomb">
       <UniqueIdentifier>{b1211d51-e275-4fcb-8af1-4b8b59cfa925}</UniqueIdentifier>
+    <Filter Include="01.Obj\Monster\Butterfly">
+      <UniqueIdentifier>{781b822f-5590-40ad-a6de-a1c48056962a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Monster\Monster">
+      <UniqueIdentifier>{cda7f070-e6b6-4b47-971d-d6959ec34912}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
