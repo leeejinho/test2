@@ -5,12 +5,12 @@
 
 
 class CPlayer;
-class CShield :
+class CBomb :
 	public CObj
 {
 public:
-	CShield();
-	virtual ~CShield();
+	CBomb();
+	virtual ~CBomb();
 
 	// CObj을(를) 통해 상속됨
 	virtual HRESULT Initialize() override;
@@ -28,6 +28,7 @@ private:
 
 private:
 	bool ChangeEffect;
+	int		Effect_Cnt;
 	CObj*	myTarget;
 	DWORD	dwTime;
 };

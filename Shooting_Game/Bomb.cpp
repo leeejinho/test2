@@ -1,63 +1,64 @@
 #include "stdafx.h"
-#include "Shield.h"
+#include "Bomb.h"
 
 
-CShield::CShield()
+CBomb::CBomb()
 	:myTarget(nullptr), dwTime(0), ChangeEffect(false)
+	,Effect_Cnt(0)
 {
 }
 
 
-CShield::~CShield()
+CBomb::~CBomb()
 {
 }
 
-HRESULT CShield::Initialize()
+HRESULT CBomb::Initialize()
 {
-	m_fSpeed = 2.f;
+	m_fSpeed = 4.f;
 	m_tInfo.vSize = { 80.f, 80.f, 0.f };
 	dwTime = GetTickCount();
 	return S_OK;
 }
 
-int CShield::Update()
+int CBomb::Update()
 {
 	if (m_bDead)
 		return OBJ_DEAD;
 	Effect();
-	if (dwTime + 8000 < GetTickCount())
+	
+	if (Effect_Cnt == 1)
+	{
 		m_bDead = true;
+	}
 
 	return OBJ_NOEVENT;
 }
 
-void CShield::Late_Update()
+void CBomb::Late_Update()
 {
 	m_tInfo.vPos = myTarget->Get_Info().vPos;
 }
 
-void CShield::Render(HDC _DC)
+void CBomb::Render(HDC _DC)
 {
 	Ellipse(_DC, int(m_tInfo.vPos.x - m_tInfo.vSize.x * 0.5f), int(m_tInfo.vPos.y - m_tInfo.vSize.y * 0.5f),
 		int(m_tInfo.vPos.x + m_tInfo.vSize.x * 0.5f), int(m_tInfo.vPos.y + m_tInfo.vSize.y * 0.5f));
 }
 
-void CShield::Release()
+void CBomb::Release()
 {
 }
 
-void CShield::Effect()
+void CBomb::Effect()
 {
-	m_fSpeed += 0.02f;
-
-	if (m_fSpeed > 2.f)
-		m_fSpeed = 2.f;
-
-
-	if (m_tInfo.vSize.x > 120.f)
+	if (m_tInfo.vSize.x > 300.f)
 		ChangeEffect = true;
 	else if (m_tInfo.vSize.x < 80.f)
+	{
+		Effect_Cnt = 1;
 		ChangeEffect = false;
+	}
 
 	if (ChangeEffect)
 	{
@@ -69,6 +70,7 @@ void CShield::Effect()
 		m_tInfo.vSize.x += m_fSpeed;
 		m_tInfo.vSize.y += m_fSpeed;
 	}
+
 	
 
 }

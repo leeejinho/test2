@@ -34,7 +34,6 @@ void CObjMgr::Update()
 		}
 	}
 
-	CCollisionMgr::Collision_Sphere(m_listObj[OBJID::BULLIT], m_listObj[OBJID::BUTTERFLY]);
 	CCollisionMgr::Collision_Sphere(m_listObj[OBJID::BULLIT], m_listObj[OBJID::MONSTER]);
 
 }

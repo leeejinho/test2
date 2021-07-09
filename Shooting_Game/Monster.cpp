@@ -37,12 +37,7 @@ int CMonster::Update()
 	int i = 0;
 	if (m_bDead)
 	{
-		while (i < 100)
-		{
-			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CDeadEffect>::Create(this), OBJID::EFFECT);
-			++i;
-		}
-
+		Play_Dead_Effect(this);
 		return OBJ_DEAD;
 	}
 

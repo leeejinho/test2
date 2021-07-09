@@ -20,9 +20,6 @@
     <ClCompile Include="Monster.cpp">
       <Filter>01.Obj\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="Shield.cpp">
-      <Filter>01.Obj\Player\Shield</Filter>
-    </ClCompile>
     <ClCompile Include="ObjMgr.cpp">
       <Filter>98.Manager\ObjMgr</Filter>
     </ClCompile>
@@ -52,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="Circle_Monster.cpp">
       <Filter>01.Obj\Monster\Circle_Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>01.Obj\Player\Bomb</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +101,6 @@
     <ClInclude Include="Monster.h">
       <Filter>01.Obj\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="Shield.h">
-      <Filter>01.Obj\Player\Shield</Filter>
-    </ClInclude>
     <ClInclude Include="ObjMgr.h">
       <Filter>98.Manager\ObjMgr</Filter>
     </ClInclude>
@@ -122,9 +119,6 @@
     <ClInclude Include="Bullet.h">
       <Filter>01.Obj\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="StageMgr.h">
-      <Filter>98.Manager\StageMgr</Filter>
-    </ClInclude>
     <ClInclude Include="DeadEffect.h">
       <Filter>01.Obj\Effect</Filter>
     </ClInclude>
@@ -133,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="Circle_Monster.h">
       <Filter>01.Obj\Monster\Circle_Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>01.Obj\Player\Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="StageMgr.h">
+      <Filter>98.Manager\StageMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -183,9 +183,6 @@
     <Filter Include="98.Manager\StageMgr">
       <UniqueIdentifier>{4cffb54e-6fce-4639-bb28-d64e23908521}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Obj\Player\Shield">
-      <UniqueIdentifier>{b1211d51-e275-4fcb-8af1-4b8b59cfa925}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Obj\Effect">
       <UniqueIdentifier>{33301309-7708-4601-a9bc-3a4916b22825}</UniqueIdentifier>
     </Filter>
@@ -194,6 +191,9 @@
     </Filter>
     <Filter Include="01.Obj\Monster\Circle_Monster">
       <UniqueIdentifier>{5a2cd437-4b9f-4af9-b788-69c486fa47e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Obj\Player\Bomb">
+      <UniqueIdentifier>{b1211d51-e275-4fcb-8af1-4b8b59cfa925}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

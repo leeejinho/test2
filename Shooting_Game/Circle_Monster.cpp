@@ -14,7 +14,6 @@ CCircle_Monster::~CCircle_Monster()
 
 HRESULT CCircle_Monster::Initialize()
 {
-	m_tInfo.vPos = { 300.f, 0.f, 0.f };
 	m_tInfo.vSize = D3DXVECTOR3(25.f, 25.f, 0.f);
 
 
