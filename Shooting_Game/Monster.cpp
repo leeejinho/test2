@@ -253,7 +253,10 @@ void CMonster::Monster_Descent()
 			if (m_fAngle > 180)
 			{
 				m_tInfo.vPos = m_vQ[4];
-				m_tInfo.vDir = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos - m_vQ[4];
+				if (!CObjMgr::Get_Instance()->Get_List(OBJID::PLAYER).empty())
+					m_tInfo.vDir = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos - m_vQ[4];
+				else
+					m_tInfo.vDir = { 0.f, 1.f, 0.f };
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 				m_bDescentRot = !m_bDescentRot;
 			}
