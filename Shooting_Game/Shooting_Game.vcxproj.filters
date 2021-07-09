@@ -115,28 +115,28 @@
       <Filter>소스 파일\99.Default</Filter>
     </ClInclude>
     <ClInclude Include="Include.h">
-      <Filter>헤더 파일\00.Headers</Filter>
+      <Filter>헤더 파일\98.Headers</Filter>
     </ClInclude>
     <ClInclude Include="Struct.h">
-      <Filter>헤더 파일\00.Headers\Include</Filter>
+      <Filter>헤더 파일\98.Headers\Include</Filter>
     </ClInclude>
     <ClInclude Include="AbstractFactory.h">
-      <Filter>헤더 파일\00.Headers\Include</Filter>
+      <Filter>헤더 파일\98.Headers\Include</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
-      <Filter>헤더 파일\00.Headers\Include</Filter>
+      <Filter>헤더 파일\98.Headers\Include</Filter>
     </ClInclude>
     <ClInclude Include="Enum.h">
-      <Filter>헤더 파일\00.Headers\Include</Filter>
+      <Filter>헤더 파일\98.Headers\Include</Filter>
     </ClInclude>
     <ClInclude Include="Extern.h">
-      <Filter>헤더 파일\00.Headers\Include</Filter>
+      <Filter>헤더 파일\98.Headers\Include</Filter>
     </ClInclude>
     <ClInclude Include="Function.h">
-      <Filter>헤더 파일\00.Headers\Include</Filter>
+      <Filter>헤더 파일\98.Headers\Include</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일\00.Headers\Include</Filter>
+      <Filter>헤더 파일\98.Headers\Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,10 +211,10 @@
     <Filter Include="헤더 파일">
       <UniqueIdentifier>{f92fc298-089a-4709-a162-a1e0d209a451}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\00.Headers">
+    <Filter Include="헤더 파일\98.Headers">
       <UniqueIdentifier>{b32fe916-5879-470e-b385-c86aa6cfea27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\00.Headers\Include">
+    <Filter Include="헤더 파일\98.Headers\Include">
       <UniqueIdentifier>{81e4aa34-fdcd-446f-82d2-7aa4733d7ea5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

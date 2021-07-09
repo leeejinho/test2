@@ -48,7 +48,10 @@ void CStageMgr::Start_Stage()
 {
 	if (m_bClear)
 	{
-		m_eCurStage = rand() % 4;
+		// debug
+		m_eCurStage = 4;
+
+		//m_eCurStage = rand() % 4;
 		m_bClear = false;
 	}
 
@@ -70,6 +73,9 @@ void CStageMgr::Start_Stage()
 	case 3:
 		Spawn_Monster_Left(10, 500);
 		Spawn_Monster_Right(10, 500);
+		break;
+	case 4:
+		Spawn_Circle_Monster(5, 300, 300.f);
 		break;
 	default:
 		break;

@@ -40,6 +40,7 @@ HRESULT CZigZag::Initialize()
 
 int CZigZag::Update()
 {
+	m_vQ[4] = m_tInfo.vPos;
 	if (m_bDead)
 	{
 		Play_Dead_Effect(this);
