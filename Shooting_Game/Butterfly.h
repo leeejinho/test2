@@ -21,12 +21,12 @@ public:
 
 public:
 	void Set_State(STATE _eState) { m_eCurState = _eState; }
+	void Set_TargetPos(D3DXVECTOR3 m_vec) { m_pTargetPos = m_vec; }
 
 public:
 	int Create_Butterfly_Right();
 	int Create_Butterfly_Left();
 
-	void Set_TargetPos(D3DXVECTOR3 m_vec) { m_pTargetPos = m_vec; }
 
 private:
 	STATE		m_eCurState;

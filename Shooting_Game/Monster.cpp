@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "MonsterBullet.h"
 #include "ObjMgr.h"
+#include "DeadEffect.h"
 
 CMonster::CMonster()
 	: m_bDiagonal(true), m_bRotation(true), m_fParentX(0.f), m_fParentY(0.f), m_eCurState(END)
@@ -24,7 +25,7 @@ HRESULT CMonster::Initialize()
 	m_vP[1] = { m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[2] = { m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
-
+	m_vP[4] = { 0.f, 0.f, 0.f };
 
 	m_fSpeed = 2.f;
 
@@ -33,8 +34,17 @@ HRESULT CMonster::Initialize()
 
 int CMonster::Update()
 {
+	int i = 0;
 	if (m_bDead)
+	{
+		while (i < 100)
+		{
+			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CDeadEffect>::Create(this), OBJID::EFFECT);
+			++i;
+		}
+
 		return OBJ_DEAD;
+	}
 
 	if(m_eCurState == LEFT)
 		Create_Monster_Left();
@@ -90,6 +100,8 @@ int CMonster::Create_Monster_Left()
 		{
 			m_fParentX = 195.f;
 			m_fParentY = 300.f;
+			if (m_vP[4].x == 0)
+				m_vP[4] = m_tInfo.vPos;
 			m_tInfo.vPos = { -100.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle > -180.f)
@@ -97,23 +109,33 @@ int CMonster::Create_Monster_Left()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos = { 100.f, 0.f, 0.f };
+				m_tInfo.vPos.x = m_vP[4].x + 195.f;
+				m_tInfo.vPos.y = m_vP[4].y ;
+				m_tInfo.vPos.z = m_vP[4].z ;
 			}
 			
 		}
 		else					// 회전후 올라감
 		{
-			m_tInfo.vPos = { 100.f, 0.f, 0.f };
-			matWorld = matTrans * matParentTrans;
-			if(m_fParentY >= 50.f)
-				m_fParentY -= m_fSpeed;
+			matWorld = matTrans;
+			if (m_tInfo.vPos.y >= 250.f)
+				m_tInfo.vPos.y -= m_fSpeed;
+			else
+			{
+				m_tInfo.vDir = m_pTargetPos - m_tInfo.vPos;
+				float fDist = D3DXVec3Length(&m_tInfo.vDir);
+				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+
+				if (fDist > 1.f)
+					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+			}
 		}
 	}
 
 	for (int i = 0; i < 4; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
-	CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);
+	//CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
+	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);
 	return 0;
 }
 
@@ -131,8 +153,8 @@ int CMonster::Create_Monster_Right()
 		matWorld = matTrans;
 		m_tInfo.vPos.x += m_fSpeed;
 		m_tInfo.vPos.y += m_fSpeed;
-		CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
-		CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);
+		/*CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
+		CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);*/
 	}
 	if (m_tInfo.vPos.y > 300.f && m_tInfo.vPos.x > 700.f)
 		m_bDiagonal = false;
@@ -145,6 +167,8 @@ int CMonster::Create_Monster_Right()
 		{
 			m_fParentX = 602.f;
 			m_fParentY = 300.f;
+			if (m_vP[4].x == 0)
+				m_vP[4] = m_tInfo.vPos;
 			m_tInfo.vPos = { 100.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle < 180.f)
@@ -152,15 +176,25 @@ int CMonster::Create_Monster_Right()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos = { -100.f, 0.f, 0.f };
+				m_tInfo.vPos.x = m_vP[4].x - 195.f;
+				m_tInfo.vPos.y = m_vP[4].y;
+				m_tInfo.vPos.z = m_vP[4].z;
 			}
 		}
 		else					// 회전후 올라감
 		{
-			m_tInfo.vPos = {- 100.f, 0.f, 0.f };
-			matWorld = matTrans * matParentTrans;
-			if (m_fParentY >= 50.f)
-				m_fParentY -= m_fSpeed;
+			matWorld = matTrans;
+			if (m_tInfo.vPos.y >= 250.f)
+				m_tInfo.vPos.y -= m_fSpeed;
+			else
+			{
+				m_tInfo.vDir = m_pTargetPos - m_tInfo.vPos;
+				float fDist = D3DXVec3Length(&m_tInfo.vDir);
+				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
+
+				if (fDist > 1.f)
+					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
+			}
 		}
 	}
 
