@@ -34,25 +34,6 @@ void CMainGame::Initialize()
 	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::PLAYER);
 	CStageMgr::Get_Instance()->Initialize();
 
-	// CircleMonster Ȯ��
-	/*pObj = CAbstractFactory<CCircle_Monster>::Create();
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
-
-	pObj = CAbstractFactory<CCircle_Monster>::Create_UnIntialize();
-	static_cast<CCircle_Monster*>(pObj)->Set_Left();
-	pObj->Initialize();
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	*/
-
-
-
-	// ������ ����
-	//pObj = CAbstractFactory<CZigZag>::Create_UnIntialize();
-	//static_cast<CZigZag*>(pObj)->Set_Left();					//����� �⺻ �����
-	//pObj->Initialize();
-	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag ���� Ȯ�ο�
-
-	//pObj = CAbstractFactory<CZigZag>::Create();
-	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	//ZigZag ���� Ȯ�ο�
 
 
 	CObjMgr::Get_Instance();
@@ -60,69 +41,7 @@ void CMainGame::Initialize()
 
 void CMainGame::Update()
 {
-	static int iCount = 0;
-
-
-
-	if (iCount < 12)
-	{
-		if (m_dwTime + 500 < GetTickCount())
-		{
-
-			int x = rand() % X;
-			int y = rand() % Y;
-
-			if (!CStageMgr::Get_Instance()->Check_Monster(x, y))
-			{
-				CObj* pObj = CAbstractFactory<CButterfly>::Create();
-				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
-				static_cast<CButterfly*>(pObj)->Set_TargetPos(CStageMgr::Get_Instance()->GetVec(x, y));
-				CStageMgr::Get_Instance()->Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
-				++iCount;
-			}
-
-			x = rand() % X;
-			y = rand() % Y;
-			if (!CStageMgr::Get_Instance()->Check_Monster(x, y))
-			{
-				CObj* pObj = CAbstractFactory<CButterfly>::Create();
-				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
-				static_cast<CButterfly*>(pObj)->Set_TargetPos(CStageMgr::Get_Instance()->GetVec(x, y));
-				CStageMgr::Get_Instance()->Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BUTTERFLY);
-				++iCount;
-			}
-
-			x = rand() % X;
-			 y = rand() % Y;
-
-			if (!CStageMgr::Get_Instance()->Check_Monster(x, y))
-			{
-				CObj* pObj = CAbstractFactory<CMonster>::Create();
-				static_cast<CMonster*>(pObj)->Set_State(CMonster::LEFT);
-				static_cast<CMonster*>(pObj)->Set_TargetPos(CStageMgr::Get_Instance()->GetVec(x, y));
-				CStageMgr::Get_Instance()->Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
-				++iCount;
-			}
-
-			x = rand() % X;
-			 y = rand() % Y;
-
-			if (!CStageMgr::Get_Instance()->Check_Monster(x, y))
-			{
-				CObj* pObj = CAbstractFactory<CMonster>::Create();
-				static_cast<CMonster*>(pObj)->Set_State(CMonster::RIGHT);
-				static_cast<CMonster*>(pObj)->Set_TargetPos(CStageMgr::Get_Instance()->GetVec(x, y));
-				CStageMgr::Get_Instance()->Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
-				++iCount;
-			}
-			m_dwTime = GetTickCount();
-		}
-
-	}
+	CStageMgr::Get_Instance()->Update();
 	CObjMgr::Get_Instance()->Update();
 }
 

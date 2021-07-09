@@ -32,8 +32,6 @@ HRESULT CZigZag::Initialize()
 		m_ChangePos[1] = D3DXVECTOR3{ 30.f, WINCY - 150.f, 0.f };
 	}
 
-
-
 	m_vP[4] = { 0.f, 0.f, 0.f };
 	m_fSpeed = 5.f;
 
