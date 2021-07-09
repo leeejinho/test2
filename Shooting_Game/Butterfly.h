@@ -21,18 +21,23 @@ public:
 
 public:
 	void Set_State(STATE _eState) { m_eCurState = _eState; }
+	void Set_TargetPos(D3DXVECTOR3 m_vec) { m_pTargetPos = m_vec; }
 
 public:
 	int Create_Butterfly_Right();
 	int Create_Butterfly_Left();
+	void Monster_Descent();
 
-	void Set_TargetPos(D3DXVECTOR3 m_vec) { m_pTargetPos = m_vec; }
 
 private:
+	DWORD		m_dwDescent;
+	bool		m_bDescentRot;
+
 	STATE		m_eCurState;
 	bool		m_bDiagonal;		// 대각선
 	bool		m_bRotation;		// 회전
 	bool		m_bInitialize;
+	bool		m_bStop;
 	D3DXVECTOR3	m_pTargetPos;
 
 	float		m_fParentX;			// 부모 x축
