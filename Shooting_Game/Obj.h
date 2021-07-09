@@ -23,6 +23,11 @@ public:
 	void Set_Dead() { m_bDead = true; }
 	void Set_Target(CObj* _pTarget) { m_pTarget = _pTarget; }
 
+	void Play_Dead_Effect(CObj* pObj);
+
+private:
+	int		Dead_Effect_Cnt;
+
 protected:
 	INFO	m_tInfo;
 	bool	m_bDead;

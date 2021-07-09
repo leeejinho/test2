@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "Butterfly.h"
 #include "StageMgr.h"
+
 #include "DeadEffect.h"
 #include "ObjMgr.h"
 #include "MonsterBullet.h"
+
 
 
 CButterfly::CButterfly()
@@ -42,12 +44,7 @@ int CButterfly::Update()
 	int i = 0;
 	if (m_bDead)
 	{
-		while (i < 100)
-		{
-			CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CDeadEffect>::Create(this), OBJID::EFFECT);
-			++i;
-		}
-		
+		Play_Dead_Effect(this);
 		return OBJ_DEAD;
 	}
 
@@ -84,7 +81,7 @@ void CButterfly::Release()
 
 int CButterfly::Create_Butterfly_Right()
 {
-	// WINCT >> 1 ÀÏ¶§ ÀÚ±âÀÚ¸® Ã£¾Æ°¡°Ô ÇÏ±â
+	// WINCT >> 1 ì¼ë•Œ ìžê¸°ìžë¦¬ ì°¾ì•„ê°€ê²Œ í•˜ê¸°
 	D3DXMATRIX matParentTrans;
 
 	D3DXMATRIX matScale, matRotZ, matTrans, matRelRotZ, matWorld;
@@ -92,13 +89,13 @@ int CButterfly::Create_Butterfly_Right()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
 
-	if (m_bInitialize)			// ÇÑ¹ø¸¸ ÃÊ±âÈ­
+	if (m_bInitialize)			// í•œë²ˆë§Œ ì´ˆê¸°í™”
 	{
 		m_tInfo.vPos = { 800.f, 500.f, 0.f };
 		m_bInitialize = false;
 	}
 
-	if (m_bDiagonal)				// ´ë°¢¼±
+	if (m_bDiagonal)				// ëŒ€ê°ì„ 
 	{
 		m_fAngle = 135.f;
 		matWorld = matRotZ * matTrans;
@@ -114,7 +111,7 @@ int CButterfly::Create_Butterfly_Right()
 	{
 		D3DXMatrixTranslation(&matParentTrans, m_fParentX, m_fParentY, 0.f);
 
-		if (m_bRotation)				// È¸Àü
+		if (m_bRotation)				// íšŒì „
 		{
 			m_fParentX = 700.f;
 			m_fParentY = 350.f;
@@ -131,7 +128,7 @@ int CButterfly::Create_Butterfly_Right()
 				m_tInfo.vPos = m_vP[4];
 			}
 		}
-		else					// È¸ÀüÈÄ ¿Ã¶ó°¨
+		else					// íšŒì „í›„ ì˜¬ë¼ê°
 		{
 			matWorld = matTrans;
 			if (m_tInfo.vPos.y >= 250.f)
@@ -176,7 +173,7 @@ int CButterfly::Create_Butterfly_Left()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
 
-	if (m_bDiagonal)				// ´ë°¢¼±
+	if (m_bDiagonal)				// ëŒ€ê°ì„ 
 	{
 		m_fAngle = 45.f;
 		matWorld = matRotZ * matTrans;
@@ -192,7 +189,7 @@ int CButterfly::Create_Butterfly_Left()
 	{
 		D3DXMatrixTranslation(&matParentTrans, m_fParentX, m_fParentY, 0.f);
 
-		if (m_bRotation)				// È¸Àü
+		if (m_bRotation)				// íšŒì „
 		{
 			m_fParentX = 100.f;
 			m_fParentY = 350.f;
@@ -208,7 +205,7 @@ int CButterfly::Create_Butterfly_Left()
 				m_tInfo.vPos = m_vP[4];
 			}
 		}
-		else					// È¸ÀüÈÄ ¿Ã¶ó°¨
+		else					// íšŒì „í›„ ì˜¬ë¼ê°
 		{
 			matWorld = matTrans;
 			if (m_tInfo.vPos.y >= 250.f)
