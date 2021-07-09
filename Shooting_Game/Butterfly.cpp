@@ -115,9 +115,8 @@ int CButterfly::Create_Butterfly_Right()
 		{
 			m_fParentX = 700.f;
 			m_fParentY = 350.f;
-			if (m_vP[4].x == 0)
-				m_vP[4] = m_tInfo.vPos;
-
+			//if(m_vP[4].x == 0)
+				//m_vP[4] = m_tInfo.vPos;
 			m_tInfo.vPos = { 50.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle < 540.f)
@@ -125,7 +124,7 @@ int CButterfly::Create_Butterfly_Right()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos = m_vP[4];
+				m_tInfo.vPos = m_vQ[4];
 			}
 		}
 		else					// 회전후 올라감
@@ -155,7 +154,7 @@ int CButterfly::Create_Butterfly_Right()
 		}
 	}
 
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 5; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
 	//CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
 	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTERBULLIT);
@@ -193,8 +192,8 @@ int CButterfly::Create_Butterfly_Left()
 		{
 			m_fParentX = 100.f;
 			m_fParentY = 350.f;
-			if (m_vP[4].x == 0)
-				m_vP[4] = m_tInfo.vPos;
+			//if (m_vP[4].x == 0)
+				//m_vP[4] = m_tInfo.vPos;
 			m_tInfo.vPos = { -50.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle > -180.f)
@@ -202,7 +201,7 @@ int CButterfly::Create_Butterfly_Left()
 			else
 			{
 				m_bRotation = false;
-				m_tInfo.vPos = m_vP[4];
+				m_tInfo.vPos = m_vQ[4];
 			}
 		}
 		else					// 회전후 올라감
@@ -232,7 +231,7 @@ int CButterfly::Create_Butterfly_Left()
 		}
 	}
 
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 5; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
 
 	return 0;
@@ -267,7 +266,10 @@ void CButterfly::Monster_Descent()
 			if (m_fAngle > 180)
 			{
 				m_tInfo.vPos = m_vQ[4];
-				m_tInfo.vDir = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos - m_vQ[4];
+				if (!CObjMgr::Get_Instance()->Get_List(OBJID::PLAYER).empty())
+					m_tInfo.vDir = CObjMgr::Get_Instance()->Get_Player()->Get_Info().vPos - m_vQ[4];
+				else
+					m_tInfo.vDir = { 0.f, 1.f, 0.f };
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 				while (iCount < 3)
 				{

@@ -41,8 +41,8 @@ void CMainGame::Initialize()
 	pObj = CAbstractFactory<CCircle_Monster>::Create_UnIntialize();
 	static_cast<CCircle_Monster*>(pObj)->Set_Left();
 	pObj->Initialize();
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	
-*/
+	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);	*/
+
 
 
 	// ������ ����

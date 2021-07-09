@@ -17,6 +17,7 @@ public:
 
 public:
 	INFO Get_Info() { return m_tInfo; }
+	D3DXVECTOR3 Get_Pos() { return m_vQ[4]; }
 
 public:
 	void Set_Pos(float _fX, float _fY) { m_tInfo.vPos.x = _fX; m_tInfo.vPos.y = _fY; }
