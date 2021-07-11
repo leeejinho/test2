@@ -287,3 +287,4 @@ void CMonster::Monster_Descent()
 	if (m_tInfo.vPos.y > WINCY + 200)
 		m_bDead = true;
 
+}
