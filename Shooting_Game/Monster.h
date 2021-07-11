@@ -6,7 +6,7 @@
 class CMonster : public CObj
 {
 public:
-	enum STATE { LEFT, RIGHT, END};
+	enum STATE { LEFT, RIGHT, DOUBLE_LEFT, DOUBLE_RIGHT, END};
 
 public:
 	CMonster();
@@ -41,6 +41,8 @@ private:
 	float		m_fParentY;			// 부모 y축
 	D3DXVECTOR3	m_pTargetPos;
 
+	bool		m_bInitialize;
+	float		m_fDouble;
 	STATE		m_eCurState;
 };
 

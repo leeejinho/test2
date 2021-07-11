@@ -6,7 +6,7 @@
 class CButterfly : public CObj
 {
 public:
-	enum STATE { LEFT, RIGHT, END };
+	enum STATE { LEFT, RIGHT, DOUBLE_LEFT, DOUBLE_RIGHT, END };
 
 public:
 	CButterfly();
@@ -39,6 +39,8 @@ private:
 	bool		m_bRotation;		// 회전
 	bool		m_bInitialize;
 	D3DXVECTOR3	m_pTargetPos;
+
+	float		m_fDouble;
 
 	float		m_fParentX;			// 부모 x축
 	float		m_fParentY;			// 부모 y축

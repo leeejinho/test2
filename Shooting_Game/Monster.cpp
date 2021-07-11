@@ -6,7 +6,8 @@
 #include "DeadEffect.h"
 
 CMonster::CMonster()
-	: m_bDiagonal(true), m_bRotation(true), m_fParentX(0.f), m_fParentY(0.f), m_eCurState(END), m_dwDescent(0), m_bStop(false), m_bDescentRot(true)
+	: m_bDiagonal(true), m_bRotation(true), m_fParentX(0.f), m_fParentY(0.f), m_eCurState(END), m_dwDescent(0), m_bStop(false), m_bDescentRot(true), m_bInitialize(true)
+	, m_fDouble(0.f)
 {
 }
 
@@ -28,6 +29,7 @@ HRESULT CMonster::Initialize()
 	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[4] = { 0.f, 0.f, 0.f };
 
+	m_fDouble = 25.f * sqrtf(2);
 	m_fSpeed = 2.f;
 
 	return S_OK;
@@ -43,9 +45,9 @@ int CMonster::Update()
 	}
 	if (!m_bStop)
 	{
-		if (m_eCurState == LEFT)
+		if (m_eCurState == LEFT || m_eCurState == DOUBLE_LEFT)
 			Create_Monster_Left();
-		if (m_eCurState == RIGHT)
+		if (m_eCurState == RIGHT || m_eCurState == DOUBLE_RIGHT)
 			Create_Monster_Right();
 	}
 	else
@@ -88,7 +90,12 @@ int CMonster::Create_Monster_Left()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
 
-	//matWorld = matScale * matRotZ * matTrans * matRelRotZ/* * matParentTrans*/;
+	if (m_bInitialize)			// 한번만 초기화
+	{
+		if (m_eCurState == DOUBLE_LEFT)
+			m_tInfo.vPos = { 400.f + m_fDouble, 0.f + m_fDouble, 0.f };
+		m_bInitialize = false;
+	}
 	if (m_bDiagonal)				// 대각선
 	{
 		matWorld = matTrans;
@@ -96,7 +103,9 @@ int CMonster::Create_Monster_Left()
 		m_tInfo.vPos.y += m_fSpeed;
 		
 	}
-	if (m_tInfo.vPos.y > 300.f && m_tInfo.vPos.x < 100.f)
+	if (m_tInfo.vPos.y > 300.f && m_eCurState == LEFT)
+		m_bDiagonal = false;
+	if (m_tInfo.vPos.y > 360.f  && m_eCurState == DOUBLE_LEFT)
 		m_bDiagonal = false;
 	
 	if (!m_bDiagonal)
@@ -107,9 +116,10 @@ int CMonster::Create_Monster_Left()
 		{
 			m_fParentX = 195.f;
 			m_fParentY = 300.f;
-			//if (m_vP[4].x == 0)
-				//m_vP[4] = m_tInfo.vPos;
-			m_tInfo.vPos = { -100.f, 0.f, 0.f };
+			if (m_eCurState == LEFT)
+				m_tInfo.vPos = { -100.f, 0.f, 0.f };
+			if (m_eCurState == DOUBLE_LEFT)
+				m_tInfo.vPos = { -130.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle > -180.f)
 				m_fAngle -= m_fSpeed;
@@ -148,8 +158,7 @@ int CMonster::Create_Monster_Left()
 
 	for (int i = 0; i < 5; ++i)
 		D3DXVec3TransformCoord(&m_vQ[i], &m_vP[i], &matWorld);
-	//CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
-	//CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);
+
 	return 0;
 }
 
@@ -161,16 +170,22 @@ int CMonster::Create_Monster_Right()
 	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(m_fAngle));
 
-	//matWorld = matScale * matRotZ * matTrans * matRelRotZ/* * matParentTrans*/;
+	if (m_bInitialize)			// 한번만 초기화
+	{
+		if (m_eCurState == DOUBLE_RIGHT)
+			m_tInfo.vPos = { 400.f - m_fDouble, 0.f + m_fDouble, 0.f };
+		m_bInitialize = false;
+	}
 	if (m_bDiagonal)				// 대각선
 	{
 		matWorld = matTrans;
 		m_tInfo.vPos.x += m_fSpeed;
 		m_tInfo.vPos.y += m_fSpeed;
-		/*CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
-		CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::BULLIT);*/
+
 	}
-	if (m_tInfo.vPos.y > 300.f && m_tInfo.vPos.x > 700.f)
+	if (m_tInfo.vPos.y > 300.f &&  m_eCurState == RIGHT)
+		m_bDiagonal = false;
+	if (m_tInfo.vPos.y > 300.f && m_eCurState == DOUBLE_RIGHT)
 		m_bDiagonal = false;
 
 	if (!m_bDiagonal)
@@ -181,9 +196,10 @@ int CMonster::Create_Monster_Right()
 		{
 			m_fParentX = 602.f;
 			m_fParentY = 300.f;
-			//if (m_vP[4].x == 0)
-				//m_vP[4] = m_tInfo.vPos;
-			m_tInfo.vPos = { 100.f, 0.f, 0.f };
+			if (m_eCurState == RIGHT)
+				m_tInfo.vPos = { 100.f, 0.f, 0.f };
+			if (m_eCurState == DOUBLE_RIGHT)
+				m_tInfo.vPos = { 130.f, 0.f, 0.f };
 			matWorld = matTrans * matRelRotZ * matParentTrans;
 			if (m_fAngle < 180.f)
 				m_fAngle += m_fSpeed;

@@ -35,7 +35,6 @@ void CMainGame::Initialize()
 	CStageMgr::Get_Instance()->Initialize();
 
 
-
 	CObjMgr::Get_Instance();
 }
 

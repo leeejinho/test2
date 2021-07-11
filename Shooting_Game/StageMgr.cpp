@@ -8,7 +8,7 @@
 
 CStageMgr* CStageMgr::m_pInstance = nullptr;
 CStageMgr::CStageMgr()
-	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0)
+	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0), m_bDoubleCheck(false)
 
 {
 	ZeroMemory(myStage, sizeof(D3DXVECTOR3) * (X*Y));
@@ -49,112 +49,127 @@ void CStageMgr::Start_Stage()
 	if (m_bClear)
 	{
 		// debug
-		m_eCurStage = 4;
+		//m_eCurStage = 6;
 
-		//m_eCurStage = rand() % 4;
+		m_eCurStage = rand() % 6;
 		m_bClear = false;
 	}
 
 	switch (m_eCurStage)
 	{
 	case 0:
-		Spawn_ButterFly_Left(6, 500);
-		Spawn_ButterFly_Right(6, 500);
+		Spawn_Double(6, 500, BUTTERFLY_RIGHT);
+		Spawn_Double(6, 500, BUTTERFLY_LEFT);
 		Spawn_Circle_Monster(5, 300, 300.f);
 		break;
 	case 1:
 		Spawn_ZigZag_Left(4, 250);
-		Spawn_ButterFly_Right(12, 500);
+		Spawn_Double(10, 500, MONSTER_LEFT);
+		Spawn_Double(10, 500, MONSTER_RIGHT);
 		break;
 	case 2:
-		Spawn_ZigZag_Right(4, 250);
-		Spawn_ButterFly_Left(12, 500);
+		Spawn_Double(6, 500, BUTTERFLY_LEFT);
+		Spawn_Double(5, 500, BUTTERFLY_LEFT_D);
+		Spawn_Double(6, 500, MONSTER_RIGHT);
 		break;
 	case 3:
-		Spawn_Monster_Left(10, 500);
-		Spawn_Monster_Right(10, 500);
+		Spawn_Double(9, 500, MONSTER_RIGHT);
+		Spawn_Double(9, 500, MONSTER_RIGHT_D);
+		Spawn_ZigZag_Left(4, 250);
 		break;
 	case 4:
+		Spawn_Double(6, 500, BUTTERFLY_RIGHT);
+		Spawn_Double(5, 500, BUTTERFLY_RIGHT_D);
+		Spawn_Double(6, 500, BUTTERFLY_LEFT);
+		Spawn_Double(5, 500, BUTTERFLY_LEFT_D);
 		Spawn_Circle_Monster(5, 300, 300.f);
 		break;
-	default:
+	case 5:
+		Spawn_Double(6, 500, MONSTER_LEFT);
+		Spawn_Double(5, 500, MONSTER_LEFT_D);
+		Spawn_Double(6, 500, MONSTER_RIGHT);
+		Spawn_Double(4, 500, MONSTER_RIGHT_D);
+		break;
+	case 6:
+		Spawn_Double(8, 500, BUTTERFLY_RIGHT);
+		Spawn_Double(5, 500, BUTTERFLY_RIGHT_D);
+		Spawn_Double(8, 500, MONSTER_LEFT);
+		Spawn_Double(5, 500, MONSTER_LEFT_D);
 		break;
 	}
 }
 
-void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 권장
-{
-	if (m_MonsterCnt[BUTTERFLY_LEFT] < _Cnt)
-	{
-		if (m_dwTime[BUTTERFLY_LEFT] + _delay < GetTickCount())
-		{
-			int x = 0;
-			int y = 0;
-			bool Check = false;
-			for (int i = 0; i < 30; ++i)
-			{
-				x = rand() % X;
-				y = rand() % Y;
-
-				if (!Check_Monster(x, y))
-				{
-					Check = true;
-					break;
-				}
-			}
-
-			if (Check)
-			{
-				CObj* pObj = CAbstractFactory<CButterfly>::Create();
-				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
-				static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
-				Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
-				++m_MonsterCnt[BUTTERFLY_LEFT];
-			}
-			m_dwTime[BUTTERFLY_LEFT] = GetTickCount();
-		}
-	}
-}
-
-void CStageMgr::Spawn_ButterFly_Right(int _Cnt, int _delay)
-{
-
-
-	if (m_MonsterCnt[BUTTERFLY_RIGHT] < _Cnt)
-	{
-		if (m_dwTime[BUTTERFLY_RIGHT] + _delay < GetTickCount())
-		{
-			int x = 0;
-			int y = 0;
-			bool Check = false;
-			for (int i = 0; i < 30; ++i)
-			{
-				x = rand() % X;
-				y = rand() % Y;
-
-				if (!Check_Monster(x, y))
-				{
-					Check = true;
-					break;
-				}
-			}
-
-			if (Check)
-			{
-				CObj* pObj = CAbstractFactory<CButterfly>::Create();
-				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
-				static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
-				Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
-				++m_MonsterCnt[BUTTERFLY_RIGHT];
-			}
-
-			m_dwTime[BUTTERFLY_RIGHT] = GetTickCount();
-		}
-	}
-
-}
+//void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 권장
+//{
+//	if (m_MonsterCnt[BUTTERFLY_LEFT] < _Cnt)
+//	{
+//		if (m_dwTime[BUTTERFLY_LEFT] + _delay < GetTickCount())
+//		{
+//			int x = 0;
+//			int y = 0;
+//			bool Check = false;
+//			for (int i = 0; i < 30; ++i)
+//			{
+//				x = rand() % X;
+//				y = rand() % Y;
+//
+//				if (!Check_Monster(x, y))
+//				{
+//					Check = true;
+//					break;
+//				}
+//			}
+//
+//			if (Check)
+//			{
+//				CObj* pObj = CAbstractFactory<CButterfly>::Create();
+//				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
+//				static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
+//				Set_Check(x, y);
+//				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+//				++m_MonsterCnt[BUTTERFLY_LEFT];
+//			}
+//			m_dwTime[BUTTERFLY_LEFT] = GetTickCount();
+//		}
+//	}
+//}
+//
+//void CStageMgr::Spawn_ButterFly_Right(int _Cnt, int _delay)
+//{
+//	if (m_MonsterCnt[BUTTERFLY_RIGHT] < _Cnt)
+//	{
+//		if (m_dwTime[BUTTERFLY_RIGHT] + _delay < GetTickCount())
+//		{
+//			int x = 0;
+//			int y = 0;
+//			bool Check = false;
+//			for (int i = 0; i < 30; ++i)
+//			{
+//				x = rand() % X;
+//				y = rand() % Y;
+//
+//				if (!Check_Monster(x, y))
+//				{
+//					Check = true;
+//					break;
+//				}
+//			}
+//
+//			if (Check)
+//			{
+//				CObj* pObj = CAbstractFactory<CButterfly>::Create();
+//				static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
+//				static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
+//				Set_Check(x, y);
+//				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+//				++m_MonsterCnt[BUTTERFLY_RIGHT];
+//			}
+//
+//			m_dwTime[BUTTERFLY_RIGHT] = GetTickCount();
+//		}
+//	}
+//	
+//}
 
 void CStageMgr::Spawn_ZigZag_Left(int _Cnt, int _delay)
 {
@@ -211,78 +226,78 @@ void CStageMgr::Spawn_Circle_Monster(int _Cnt, int _delay, float fX)
 	}
 }
 
-void CStageMgr::Spawn_Monster_Left(int _Cnt, int _delay)
-{
-
-	if (m_MonsterCnt[MONSTER_LEFT] < _Cnt)
-	{
-		if (m_dwTime[MONSTER_LEFT] + _delay < GetTickCount())
-		{
-
-			int x = 0;
-			int y = 0;
-			bool Check = false;
-			for (int i = 0; i < 30; ++i)
-			{
-				x = rand() % X;
-				y = rand() % Y;
-
-				if (!Check_Monster(x, y))
-				{
-					Check = true;
-					break;
-				}
-			}
-
-			if(Check)
-			{
-				CObj* pObj = CAbstractFactory<CMonster>::Create();
-				static_cast<CMonster*>(pObj)->Set_State(CMonster::LEFT);
-				static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
-				Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
-				++m_MonsterCnt[MONSTER_LEFT];
-			}
-			m_dwTime[MONSTER_LEFT] = GetTickCount();
-		}
-	}
-}
-
-void CStageMgr::Spawn_Monster_Right(int _Cnt, int _delay)
-{
-	if (m_MonsterCnt[MONSTER_RIGHT] < _Cnt)
-	{
-		if (m_dwTime[MONSTER_RIGHT] + _delay < GetTickCount())
-		{
-			int x = 0;
-			int y = 0;
-			bool Check = false;
-			for (int i = 0; i < 30; ++i)
-			{
-				 x = rand() % X;
-				 y = rand() % Y;
-
-				 if (!Check_Monster(x, y))
-				 {
-					 Check = true;
-					 break;
-				 }
-			}
-
-			if (Check)
-			{
-				CObj* pObj = CAbstractFactory<CMonster>::Create();
-				static_cast<CMonster*>(pObj)->Set_State(CMonster::RIGHT);
-				static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
-				Set_Check(x, y);
-				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
-				++m_MonsterCnt[MONSTER_RIGHT];
-
-				m_dwTime[MONSTER_RIGHT] = GetTickCount();
-			}
-		}
-	}
-}
+//void CStageMgr::Spawn_Monster_Left(int _Cnt, int _delay)
+//{
+//
+//	if (m_MonsterCnt[MONSTER_LEFT] < _Cnt)
+//	{
+//		if (m_dwTime[MONSTER_LEFT] + _delay < GetTickCount())
+//		{
+//
+//			int x = 0;
+//			int y = 0;
+//			bool Check = false;
+//			for (int i = 0; i < 30; ++i)
+//			{
+//				x = rand() % X;
+//				y = rand() % Y;
+//
+//				if (!Check_Monster(x, y))
+//				{
+//					Check = true;
+//					break;
+//				}
+//			}
+//
+//			if (Check)
+//			{
+//				CObj* pObj = CAbstractFactory<CMonster>::Create();
+//				static_cast<CMonster*>(pObj)->Set_State(CMonster::LEFT);
+//				static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
+//				Set_Check(x, y);
+//				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+//				++m_MonsterCnt[MONSTER_LEFT];
+//			}
+//			m_dwTime[MONSTER_LEFT] = GetTickCount();
+//		}
+//	}
+//}
+//
+//void CStageMgr::Spawn_Monster_Right(int _Cnt, int _delay)
+//{
+//	if (m_MonsterCnt[MONSTER_RIGHT] < _Cnt)
+//	{
+//		if (m_dwTime[MONSTER_RIGHT] + _delay < GetTickCount())
+//		{
+//			int x = 0;
+//			int y = 0;
+//			bool Check = false;
+//			for (int i = 0; i < 30; ++i)
+//			{
+//				x = rand() % X;
+//				y = rand() % Y;
+//
+//				if (!Check_Monster(x, y))
+//				{
+//					Check = true;
+//					break;
+//				}
+//			}
+//
+//			if (Check)
+//			{
+//				CObj* pObj = CAbstractFactory<CMonster>::Create();
+//				static_cast<CMonster*>(pObj)->Set_State(CMonster::RIGHT);
+//				static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
+//				Set_Check(x, y);
+//				CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+//				++m_MonsterCnt[MONSTER_RIGHT];
+//
+//				m_dwTime[MONSTER_RIGHT] = GetTickCount();
+//			}
+//		}
+//	}
+//}
 
 
 void CStageMgr::Check_Clear()
@@ -314,3 +329,104 @@ bool CStageMgr::Check_Monster(int x, int y)
 	else return false;
 }
 
+void CStageMgr::Spawn_Double(int _Cnt, int _delay, CStageMgr::ID _eID)
+{
+	if (m_MonsterCnt[_eID] < _Cnt)
+	{
+		if (m_dwTime[_eID] + _delay < GetTickCount())
+		{
+			int x = 0;
+			int y = 0;
+			bool Check = false;
+			for (int i = 0; i < 30; ++i)
+			{
+				x = rand() % X;
+				y = rand() % Y;
+
+				if (!Check_Monster(x, y))
+				{
+					Check = true;
+					break;
+				}
+			}
+			if (Check)
+			{
+				CObj* pObj = nullptr;
+				switch (_eID)
+				{
+				case CStageMgr::BUTTERFLY_LEFT:
+					pObj = CAbstractFactory<CButterfly>::Create();
+					static_cast<CButterfly*>(pObj)->Set_State(CButterfly::LEFT);
+					static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[BUTTERFLY_LEFT];
+					break;
+				case CStageMgr::BUTTERFLY_RIGHT:
+					pObj = CAbstractFactory<CButterfly>::Create();
+					static_cast<CButterfly*>(pObj)->Set_State(CButterfly::RIGHT);
+					static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[BUTTERFLY_RIGHT];
+					break;
+				case CStageMgr::MONSTER_LEFT:
+					pObj = CAbstractFactory<CMonster>::Create();
+					static_cast<CMonster*>(pObj)->Set_State(CMonster::LEFT);
+					static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[MONSTER_LEFT];
+					break;
+				case CStageMgr::MONSTER_RIGHT:
+					pObj = CAbstractFactory<CMonster>::Create();
+					static_cast<CMonster*>(pObj)->Set_State(CMonster::RIGHT);
+					static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[MONSTER_RIGHT];
+					break;
+				case CStageMgr::BUTTERFLY_LEFT_D:
+					pObj = CAbstractFactory<CButterfly>::Create();
+					static_cast<CButterfly*>(pObj)->Set_State(CButterfly::DOUBLE_LEFT);
+					static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[BUTTERFLY_LEFT_D];
+					break;
+				case CStageMgr::BUTTERFLY_RIGHT_D:
+					pObj = CAbstractFactory<CButterfly>::Create();
+					static_cast<CButterfly*>(pObj)->Set_State(CButterfly::DOUBLE_RIGHT);
+					static_cast<CButterfly*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[BUTTERFLY_RIGHT_D];
+					break;
+				case CStageMgr::MONSTER_LEFT_D:
+					pObj = CAbstractFactory<CMonster>::Create();
+					static_cast<CMonster*>(pObj)->Set_State(CMonster::DOUBLE_LEFT);
+					static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[MONSTER_LEFT_D];
+					break;
+				case CStageMgr::MONSTER_RIGHT_D:
+					pObj = CAbstractFactory<CMonster>::Create();
+					static_cast<CMonster*>(pObj)->Set_State(CMonster::DOUBLE_RIGHT);
+					static_cast<CMonster*>(pObj)->Set_TargetPos(GetVec(x, y));
+					Set_Check(x, y);
+					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTER);
+					++m_MonsterCnt[MONSTER_RIGHT_D];
+					break;
+				case CStageMgr::MONSTER_END:
+					break;
+				default:
+					break;
+				}
+			}
+
+			m_dwTime[_eID] = GetTickCount();
+		}
+	}
+
+}
