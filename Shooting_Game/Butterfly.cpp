@@ -100,11 +100,12 @@ int CButterfly::Create_Butterfly_Right()
 		matWorld = matRotZ * matTrans;
 		m_tInfo.vPos.x -= m_fSpeed;
 		m_tInfo.vPos.y -= m_fSpeed;
-	}
-	if (m_tInfo.vPos.x >= 650.f && m_tInfo.vPos.y <= 350.f)
-	{
-		m_bDiagonal = false;
-		m_fAngle = 180.f;
+
+		if (m_tInfo.vPos.x < 650.f && m_tInfo.vPos.y < 350.f)
+		{
+			m_bDiagonal = false;
+			m_fAngle = 180.f;
+		}
 	}
 	if (!m_bDiagonal)
 	{
@@ -138,7 +139,7 @@ int CButterfly::Create_Butterfly_Right()
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 
-				if (fDist > 1.f)
+				if (fDist > 3.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
@@ -177,11 +178,12 @@ int CButterfly::Create_Butterfly_Left()
 		matWorld = matRotZ * matTrans;
 		m_tInfo.vPos.x += m_fSpeed;
 		m_tInfo.vPos.y -= m_fSpeed;
-	}
-	if (m_tInfo.vPos.x >= 150.f && m_tInfo.vPos.y <= 350.f)
-	{
-		m_bDiagonal = false;
-		m_fAngle = 180.f;
+
+		if (m_tInfo.vPos.x > 150.f && m_tInfo.vPos.y < 350.f)
+		{
+			m_bDiagonal = false;
+			m_fAngle = 180.f;
+		}
 	}
 	if (!m_bDiagonal)
 	{
@@ -214,8 +216,7 @@ int CButterfly::Create_Butterfly_Left()
 				m_tInfo.vDir = m_pTargetPos - m_tInfo.vPos;
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
-
-				if (fDist > 2.f)
+				if (fDist > 3.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
