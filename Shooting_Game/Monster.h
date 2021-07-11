@@ -31,6 +31,7 @@ public:
 
 private:
 	DWORD		m_dwDescent;
+	DWORD		m_Delay;
 	bool		m_bDescentRot;
 	bool		m_bStop;
 

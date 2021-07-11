@@ -1,9 +1,9 @@
-
 #include "stdafx.h"
 #include "Monster.h"
 #include "MonsterBullet.h"
 #include "ObjMgr.h"
 #include "DeadEffect.h"
+#include "StageMgr.h"
 
 CMonster::CMonster()
 	: m_bDiagonal(true), m_bRotation(true), m_fParentX(0.f), m_fParentY(0.f), m_eCurState(END), m_dwDescent(0), m_bStop(false), m_bDescentRot(true)
@@ -28,7 +28,8 @@ HRESULT CMonster::Initialize()
 	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[4] = { 0.f, 0.f, 0.f };
 
-	m_fSpeed = 2.f;
+	m_fSpeed = 2.f + CStageMgr::Get_Instance()->Get_Stage();
+	m_Delay = rand() & 3000 + 2000;
 
 	return S_OK;
 }
@@ -133,7 +134,7 @@ int CMonster::Create_Monster_Left()
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 
-				if (fDist > 1.f)
+				if (fDist > 10.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
@@ -206,7 +207,7 @@ int CMonster::Create_Monster_Right()
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 
-				if (fDist > 1.f)
+				if (fDist > 2.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
@@ -229,10 +230,11 @@ void CMonster::Monster_Descent()
 {
 	D3DXMATRIX matParentTrans;
 	D3DXMATRIX matTrans, matRelRotZ, matWorld;
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	int Delay = 5000;
 	int iCount = 0;
 
-	if (m_dwDescent + Delay < GetTickCount())
+	if (m_dwDescent + m_Delay < GetTickCount())
 	{
 		if (m_bDescentRot)
 		{

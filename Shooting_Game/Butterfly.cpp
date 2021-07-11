@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "Butterfly.h"
 #include "StageMgr.h"
-
 #include "DeadEffect.h"
 #include "ObjMgr.h"
 #include "MonsterBullet.h"
-
+#include "StageMgr.h"
 
 
 CButterfly::CButterfly()
@@ -34,8 +33,8 @@ HRESULT CButterfly::Initialize()
 
 	m_vP[4] = { 0.f, 0.f, 0.f };
 
-	m_fSpeed = 2.f;
-
+	m_fSpeed = 2.f + CStageMgr::Get_Instance()->Get_Stage();
+	m_Delay = rand() & 3000 + 2000;
 	return S_OK;
 }
 
@@ -241,18 +240,18 @@ void CButterfly::Monster_Descent()
 {
 	D3DXMATRIX matParentTrans;
 	D3DXMATRIX matTrans, matRelRotZ, matWorld;
-	int Delay = 5000;
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	int iCount = 0;
 
-	if (m_dwDescent + Delay < GetTickCount())
+	if (m_dwDescent + m_Delay < GetTickCount())
 	{
 		if (m_bDescentRot)
 		{
-			m_fAngle += 2.f;
+			m_fAngle += m_fSpeed;
 			if (m_tInfo.vPos.x < (WINCX >> 1))
 			{
 				D3DXMatrixTranslation(&matTrans, 50.f, 0.f, 0.f);
-				D3DXMatrixTranslation(&matParentTrans, -50.f, m_tInfo.vPos.y, 0.f);
+				D3DXMatrixTranslation(&matParentTrans, m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y, 0.f);
 				D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(-m_fAngle));
 			}
 			else

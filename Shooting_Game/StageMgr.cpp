@@ -8,7 +8,7 @@
 
 CStageMgr* CStageMgr::m_pInstance = nullptr;
 CStageMgr::CStageMgr()
-	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0)
+	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0), m_fStage(0.f)
 
 {
 	ZeroMemory(myStage, sizeof(D3DXVECTOR3) * (X*Y));
@@ -49,10 +49,11 @@ void CStageMgr::Start_Stage()
 	if (m_bClear)
 	{
 		// debug
-		m_eCurStage = 4;
+		//m_eCurStage = 4;
 
-		//m_eCurStage = rand() % 4;
+		m_eCurStage = rand() % 4;
 		m_bClear = false;
+		m_fStage += 0.5f;
 	}
 
 	switch (m_eCurStage)

@@ -52,6 +52,8 @@ public:
 
 	void Check_Clear();
 
+public:
+	float Get_Stage() { return m_fStage; }
 
 public:
 	D3DXVECTOR3		    GetVec(int x, int y) { return myStage[x][y]; }
@@ -66,6 +68,8 @@ private:
 	DWORD				m_dwTime[MONSTER_END];
 	int					m_MonsterCnt[MONSTER_END];
 	int					m_eCurStage;
+
+	float				m_fStage;
 
 
 

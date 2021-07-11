@@ -31,6 +31,7 @@ public:
 
 private:
 	DWORD		m_dwDescent;
+	DWORD		m_Delay;
 	bool		m_bDescentRot;
 	bool		m_bStop;
 
@@ -39,6 +40,7 @@ private:
 	bool		m_bRotation;		// 회전
 	bool		m_bInitialize;
 	D3DXVECTOR3	m_pTargetPos;
+
 
 	float		m_fParentX;			// 부모 x축
 	float		m_fParentY;			// 부모 y축
