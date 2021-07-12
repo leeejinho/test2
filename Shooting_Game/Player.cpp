@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "Bomb.h"
 #include "ObjMgr.h"
 #include "KeyMgr.h"
 #include "Bullet.h"
@@ -94,9 +93,6 @@ void CPlayer::KeyCheck()
 
 	if (CKeyMgr::Get_Instance()->Key_Down('A'))
 		Create_Bullet();
-
-	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
-		Create_Shield();
 }
 
 void CPlayer::OffSet()
@@ -108,12 +104,7 @@ void CPlayer::OffSet()
 		m_tInfo.vPos += -m_tInfo.vDir * m_fSpeed;
 }
 
-void CPlayer::Create_Shield()
-{
-	CObj* pObj = CAbstractFactory<CBomb>::Create();
-	static_cast<CBomb*>(pObj)->Set_Player(this);
-	CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::SKILL);
-}
+
 
 void CPlayer::Create_Bullet()
 {

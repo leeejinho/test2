@@ -36,6 +36,7 @@ HRESULT CMonster::Initialize()
 
 int CMonster::Update()
 {
+	CheckPos_Dead();
 	int i = 0;
 	if (m_bDead)
 	{

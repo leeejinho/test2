@@ -177,7 +177,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScrollMgr.h" />
-    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Shooting_Game.h" />
     <ClInclude Include="StageMgr.h" />
     <ClInclude Include="stdafx.h" />
@@ -199,7 +198,6 @@
     <ClCompile Include="ObjMgr.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
-    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Shooting_Game.cpp" />
     <ClCompile Include="StageMgr.cpp" />
     <ClCompile Include="stdafx.cpp">

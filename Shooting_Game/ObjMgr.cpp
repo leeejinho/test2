@@ -76,3 +76,14 @@ void CObjMgr::Delete_ID(OBJID::ID _eID)
 	for_each(m_listObj[_eID].begin(), m_listObj[_eID].end(), Safe_Delete<CObj*>);
 	m_listObj[_eID].clear();
 }
+
+void CObjMgr::Clear_List_For_Restart()
+{
+
+	Delete_ID(OBJID::MONSTER);
+	Delete_ID(OBJID::BULLIT);
+	Delete_ID(OBJID::MONSTERBULLIT);
+	Delete_ID(OBJID::EFFECT);
+
+
+}

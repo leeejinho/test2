@@ -24,7 +24,7 @@ HRESULT CCircle_Monster::Initialize()
 	m_vP[3] = { -m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f };
 	m_vP[4] = { 0.f, 0.f, 0.f };
 
-	m_fSpeed = 2.f + CStageMgr::Get_Instance()->Get_Stage();
+ 	m_fSpeed = 2.f + CStageMgr::Get_Instance()->Get_Stage();
 	m_fAngle = 0;
 	return S_OK;
 
@@ -33,6 +33,7 @@ HRESULT CCircle_Monster::Initialize()
 
 int CCircle_Monster::Update()
 {
+	CheckPos_Dead();
 	m_vQ[4] = m_tInfo.vPos;
 	if (m_bDead)
 	{
