@@ -135,7 +135,7 @@ int CMonster::Create_Monster_Left()
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 
-				if (fDist > 10.f)
+				if (fDist > 3.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
@@ -208,7 +208,7 @@ int CMonster::Create_Monster_Right()
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 
-				if (fDist > 2.f)
+				if (fDist > 3.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
@@ -239,7 +239,7 @@ void CMonster::Monster_Descent()
 	{
 		if (m_bDescentRot)
 		{
-			m_fAngle += 2.f;
+			m_fAngle += m_fSpeed;
 			if (m_tInfo.vPos.x < (WINCX >> 1))
 			{
 				D3DXMatrixTranslation(&matTrans, 50.f, 0.f, 0.f);

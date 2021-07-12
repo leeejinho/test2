@@ -76,11 +76,16 @@ void CStageMgr::Start_Stage()
 	if (m_bClear)
 	{
 		// debug
-		//m_eCurStage = 4;
+		m_eCurStage = 0;
 
 		m_eCurStage = rand() % 5;
 		m_bClear = false;
 		m_fStage += 1.0f;
+		//m_eCurStage = rand() % 4;
+		m_bClear = false;
+		m_fStage += 0.5f;
+		if (m_fStage > 5.f)
+			m_fStage = 5.f;
 	}
   
 	switch (m_eCurStage)
@@ -111,7 +116,7 @@ void CStageMgr::Start_Stage()
 	}
 }
 
-void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 ±ÇÀå
+void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 Â±Ã‡Ã€Ã¥
 {
 	if (m_MonsterCnt[BUTTERFLY_LEFT] < _Cnt)
 	{
