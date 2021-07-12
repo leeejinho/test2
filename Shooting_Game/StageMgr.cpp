@@ -5,10 +5,12 @@
 #include "ObjMgr.h"
 #include "Circle_Monster.h"
 #include "Monster.h"
+#include "KeyMgr.h"
+#include "Player.h"
 
 CStageMgr* CStageMgr::m_pInstance = nullptr;
 CStageMgr::CStageMgr()
-	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0), m_fStage(0.f)
+	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0), m_fStage(0.f), m_pPlayer(nullptr)
 
 {
 	ZeroMemory(myStage, sizeof(D3DXVECTOR3) * (X*Y));
@@ -40,24 +42,52 @@ void CStageMgr::Initialize()
 
 void CStageMgr::Update()
 {
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
+		Start_Again();
 	Check_Clear();
 	Start_Stage();
 }
 
+void CStageMgr::Start_Again()
+{
+	//if(CObjMgr::Get_Instance()->Get_List(OBJID::PLAYER).size() > 0)
+	//m_pPlayer = CObjMgr::Get_Instance()->Get_Player();
+	//else m_pPlayer = nullptr
+
+	if (m_pPlayer != nullptr)
+		return;
+
+	CObjMgr::Get_Instance()->Clear_List_For_Restart();
+	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CPlayer>::Create(), OBJID::PLAYER);
+	m_fStage = 0.f;
+	m_bClear = false;
+
+}
+
 void CStageMgr::Start_Stage()
 {
+	if (CObjMgr::Get_Instance()->Get_List(OBJID::PLAYER).size() > 0) 
+		m_pPlayer = CObjMgr::Get_Instance()->Get_Player();
+	else m_pPlayer = nullptr;
+
+	if (m_pPlayer == nullptr) 
+		return;
+
 	if (m_bClear)
 	{
 		// debug
 		m_eCurStage = 0;
 
+		m_eCurStage = rand() % 5;
+		m_bClear = false;
+		m_fStage += 1.0f;
 		//m_eCurStage = rand() % 4;
 		m_bClear = false;
 		m_fStage += 0.5f;
 		if (m_fStage > 5.f)
 			m_fStage = 5.f;
 	}
-
+  
 	switch (m_eCurStage)
 	{
 	case 0:
@@ -78,14 +108,15 @@ void CStageMgr::Start_Stage()
 		Spawn_Monster_Right(10, 500);
 		break;
 	case 4:
-		Spawn_Circle_Monster(5, 300, 300.f);
+		//Spawn_Circle_Monster(5, 300, 300.f);
+		Spawn_ButterFly_Right(10, 500);
 		break;
 	default:
 		break;
 	}
 }
 
-void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 ±ÇÀå
+void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 Â±Ã‡Ã€Ã¥
 {
 	if (m_MonsterCnt[BUTTERFLY_LEFT] < _Cnt)
 	{
@@ -237,7 +268,7 @@ void CStageMgr::Spawn_Monster_Left(int _Cnt, int _delay)
 				}
 			}
 
-			if(Check)
+			if (Check)
 			{
 				CObj* pObj = CAbstractFactory<CMonster>::Create();
 				static_cast<CMonster*>(pObj)->Set_State(CMonster::LEFT);
@@ -262,14 +293,14 @@ void CStageMgr::Spawn_Monster_Right(int _Cnt, int _delay)
 			bool Check = false;
 			for (int i = 0; i < 30; ++i)
 			{
-				 x = rand() % X;
-				 y = rand() % Y;
+				x = rand() % X;
+				y = rand() % Y;
 
-				 if (!Check_Monster(x, y))
-				 {
-					 Check = true;
-					 break;
-				 }
+				if (!Check_Monster(x, y))
+				{
+					Check = true;
+					break;
+				}
 			}
 
 			if (Check)

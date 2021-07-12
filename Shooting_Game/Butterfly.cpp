@@ -40,6 +40,7 @@ HRESULT CButterfly::Initialize()
 
 int CButterfly::Update()
 {
+	CheckPos_Dead();
 	int i = 0;
 	if (m_bDead)
 	{

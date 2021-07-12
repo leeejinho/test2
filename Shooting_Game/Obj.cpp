@@ -29,4 +29,14 @@ void CObj::Play_Dead_Effect(CObj* pObj)
 	}
 }
 
+void CObj::CheckPos_Dead()
+{
+	if (m_tInfo.vPos.x < -WINCX * 0.5f ||
+		m_tInfo.vPos.x > WINCX * 1.5f ||
+		m_tInfo.vPos.y < -WINCY * 0.5f ||
+		m_tInfo.vPos.y > WINCY * 1.5f)
+
+		m_bDead = true;
+}
+
 

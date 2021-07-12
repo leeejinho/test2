@@ -26,12 +26,14 @@ public:
 
 	void Play_Dead_Effect(CObj* pObj);
 
+	void CheckPos_Dead();
+
 private:
 	int		Dead_Effect_Cnt;
 
 protected:
-	INFO	m_tInfo;
-	bool	m_bDead;
+	INFO		m_tInfo;
+	bool		m_bDead;
 	float		m_fSpeed;
 	D3DXVECTOR3 m_vQ[5];
 	D3DXVECTOR3 m_vP[5];

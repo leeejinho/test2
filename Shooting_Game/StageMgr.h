@@ -48,8 +48,8 @@ public:
 
 
 
+	void Start_Again();
 	void Start_Stage();
-
 	void Check_Clear();
 
 public:
@@ -61,6 +61,7 @@ public:
 	bool				Check_Monster(int x, int y);				// 자리 비었는지 체크하는 함수
 
 private:
+	CObj*				m_pPlayer;
 	D3DXVECTOR3			myStage[X][Y];
 	bool				m_bMonster[X][Y];
 	bool				m_bClear;
@@ -70,6 +71,7 @@ private:
 	int					m_eCurStage;
 
 	float				m_fStage;
+
 
 
 

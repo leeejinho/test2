@@ -10,9 +10,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\01.Obj\00.Player</Filter>
     </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>소스 파일\01.Obj\00.Player\Bomb</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>소스 파일\01.Obj\01.Monster</Filter>
     </ClCompile>
@@ -65,9 +62,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>소스 파일\01.Obj\00.Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>소스 파일\01.Obj\00.Player\Bomb</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>소스 파일\01.Obj\01.Monster</Filter>
@@ -159,9 +153,6 @@
     </Filter>
     <Filter Include="소스 파일\01.Obj\00.Player">
       <UniqueIdentifier>{586db649-0cf7-425d-8428-e386684498a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\01.Obj\00.Player\Bomb">
-      <UniqueIdentifier>{eb74e3cd-f41c-401a-98c9-720067895563}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\01.Obj\01.Monster">
       <UniqueIdentifier>{e95878f7-6c1e-4865-80f6-b71e65f2f026}</UniqueIdentifier>

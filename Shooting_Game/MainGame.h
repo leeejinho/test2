@@ -17,7 +17,11 @@ public:
 
 private:
 	HDC		m_hDC;
+	HDC		m_BackDC;
+	HBITMAP m_backBit;
+	HBITMAP m_oldBit;
 	DWORD	m_dwTime;
+
 };
 
 #endif // !__MAINGAME_H__
