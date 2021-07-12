@@ -108,8 +108,7 @@ void CPlayer::OffSet()
 
 void CPlayer::Create_Bullet()
 {
-	if (CObjMgr::Get_Instance()->Get_List(OBJID::BULLIT).size() > (size_t)2)	// 총알 수 제한	(몬스터 bullet이 추가되면 OBJID 수정해야될수도)
-		return;
+	if (CObjMgr::Get_Instance()->Get_List(OBJID::BULLIT).size() > (size_t)2)
 
 	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CBullet>::Create(), OBJID::BULLIT);
 }
