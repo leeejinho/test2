@@ -36,6 +36,10 @@ public:
 		SAFE_DELETE(m_pInstance);
 	}
 
+
+public:
+	void Clear_List_For_Restart();
+
 private:
 	static CObjMgr*		m_pInstance;
 

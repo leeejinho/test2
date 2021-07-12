@@ -31,19 +31,20 @@ public:
 
 private:
 	DWORD		m_dwDescent;
+	DWORD		m_Delay;
 	bool		m_bDescentRot;
 	bool		m_bStop;
 
 	STATE		m_eCurState;
-	bool		m_bDiagonal;		// ´ë°¢¼±
-	bool		m_bRotation;		// È¸Àü
+	bool		m_bDiagonal;		// ëŒ€ê°ì„ 
+	bool		m_bRotation;		// íšŒì „
 	bool		m_bInitialize;
 	D3DXVECTOR3	m_pTargetPos;
 
 	float		m_fDouble;
 
-	float		m_fParentX;			// ºÎ¸ğ xÃà
-	float		m_fParentY;			// ºÎ¸ğ yÃà
+	float		m_fParentX;			// ë¶€ëª¨ xì¶•
+	float		m_fParentY;			// ë¶€ëª¨ yì¶•
 };
 
 #endif // !__BUTTERFLY_H__

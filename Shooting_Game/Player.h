@@ -29,7 +29,6 @@ private:
 	float fScaleX, fScaleY;
 
 private:
-	void Create_Shield();
 	void Create_Bullet();
 
 

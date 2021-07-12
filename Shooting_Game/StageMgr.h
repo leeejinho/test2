@@ -48,20 +48,23 @@ public:
 	//void Spawn_Monster_Right(int _Cnt, int _delay);
 
 
-	void Spawn_Double(int _Cnt, int _delay, CStageMgr::ID _eID);				// 2ÁÙ ³ª¿À´Â °Í¸¸.
+	void Spawn_Double(int _Cnt, int _delay, CStageMgr::ID _eID);				// 2ì¤„ ë‚˜ì˜¤ëŠ” ê²ƒë§Œ.
 
+	void Start_Again();
 	void Start_Stage();
-
 	void Check_Clear();
 
+public:
+	float Get_Stage() { return m_fStage; }
 
 public:
 	D3DXVECTOR3		    GetVec(int x, int y) { return myStage[x][y]; }
 	void				Set_Check(int x, int y) { m_bMonster[x][y] = true; }
-	bool				Check_Monster(int x, int y);				// ÀÚ¸® ºñ¾ú´ÂÁö Ã¼Å©ÇÏ´Â ÇÔ¼ö
+	bool				Check_Monster(int x, int y);				// ìë¦¬ ë¹„ì—ˆëŠ”ì§€ ì²´í¬í•˜ëŠ” í•¨ìˆ˜
 
 
 private:
+	CObj*				m_pPlayer;
 	D3DXVECTOR3			myStage[X][Y];
 	bool				m_bMonster[X][Y];
 	bool				m_bClear;
@@ -70,7 +73,11 @@ private:
 	int					m_MonsterCnt[MONSTER_END];
 	int					m_eCurStage;
 
-	bool				m_bDoubleCheck;			// 2ÁÙÀÎÁö ¾Æ´ÑÁö Ã¼Å©
+
+	bool				m_bDoubleCheck;			// 2ì¤„ì¸ì§€ ì•„ë‹Œì§€ ì²´í¬
+
+	float				m_fStage;
+
 
 };
 

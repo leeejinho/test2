@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "Butterfly.h"
 #include "StageMgr.h"
-
 #include "DeadEffect.h"
 #include "ObjMgr.h"
 #include "MonsterBullet.h"
-
+#include "StageMgr.h"
 
 
 CButterfly::CButterfly()
@@ -34,14 +33,19 @@ HRESULT CButterfly::Initialize()
 
 	m_vP[4] = { 0.f, 0.f, 0.f };
 
+
 	m_fDouble = 25.f * sqrtf(2);
-	m_fSpeed = 2.f;
+
+
+	m_fSpeed = 2.f + CStageMgr::Get_Instance()->Get_Stage();
+	m_Delay = rand() & 3000 + 2000;
 
 	return S_OK;
 }
 
 int CButterfly::Update()
 {
+	CheckPos_Dead();
 	int i = 0;
 	if (m_bDead)
 	{
@@ -112,11 +116,14 @@ int CButterfly::Create_Butterfly_Right()
 			m_bDiagonal = false;
 			m_fAngle = 180.f;
 		}
+
 		if (m_tInfo.vPos.y <= 410.f && m_eCurState == DOUBLE_RIGHT && m_bDiagonal)
 		{
 			m_bDiagonal = false;
 			m_fAngle = 130.f;
 		}
+
+
 	}
 	if (!m_bDiagonal)
 	{
@@ -151,7 +158,7 @@ int CButterfly::Create_Butterfly_Right()
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 
-				if (fDist > 1.f)
+				if (fDist > 3.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
@@ -195,11 +202,13 @@ int CButterfly::Create_Butterfly_Left()
 		m_tInfo.vPos.x += m_fSpeed;
 		m_tInfo.vPos.y -= m_fSpeed;
 
+
 		if (m_bDiagonal && m_tInfo.vPos.y <= 350.f && m_eCurState == LEFT)
 		{
 			m_bDiagonal = false;
 			m_fAngle = 180.f;
 		}
+
 		if (m_bDiagonal && m_tInfo.vPos.y <= 410.f && m_eCurState == DOUBLE_LEFT)
 		{
 			m_bDiagonal = false;
@@ -238,8 +247,7 @@ int CButterfly::Create_Butterfly_Left()
 				m_tInfo.vDir = m_pTargetPos - m_tInfo.vPos;
 				float fDist = D3DXVec3Length(&m_tInfo.vDir);
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
-
-				if (fDist > 2.f)
+				if (fDist > 3.f)
 					m_tInfo.vPos += m_tInfo.vDir * m_fSpeed;
 				else
 				{
@@ -264,18 +272,18 @@ void CButterfly::Monster_Descent()
 {
 	D3DXMATRIX matParentTrans;
 	D3DXMATRIX matTrans, matRelRotZ, matWorld;
-	int Delay = 5000;
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, 0.f);
 	int iCount = 0;
 
-	if (m_dwDescent + Delay < GetTickCount())
+	if (m_dwDescent + m_Delay < GetTickCount())
 	{
 		if (m_bDescentRot)
 		{
-			m_fAngle += 2.f;
+			m_fAngle += m_fSpeed;
 			if (m_tInfo.vPos.x < (WINCX >> 1))
 			{
 				D3DXMatrixTranslation(&matTrans, 50.f, 0.f, 0.f);
-				D3DXMatrixTranslation(&matParentTrans, -50.f, m_tInfo.vPos.y, 0.f);
+				D3DXMatrixTranslation(&matParentTrans, m_tInfo.vPos.x - 50.f, m_tInfo.vPos.y, 0.f);
 				D3DXMatrixRotationZ(&matRelRotZ, D3DXToRadian(-m_fAngle));
 			}
 			else

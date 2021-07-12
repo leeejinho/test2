@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ZigZag.h"
-
+#include "StageMgr.h"
 
 CZigZag::CZigZag()
 	:m_PatternNum(0), m_bLeft(false)
@@ -33,13 +33,14 @@ HRESULT CZigZag::Initialize()
 	}
 
 	m_vP[4] = { 0.f, 0.f, 0.f };
-	m_fSpeed = 5.f;
+	m_fSpeed = 5.f + CStageMgr::Get_Instance()->Get_Stage();
 
 	return S_OK;
 }
 
 int CZigZag::Update()
 {
+	CheckPos_Dead();
 	m_vQ[4] = m_tInfo.vPos;
 	if (m_bDead)
 	{

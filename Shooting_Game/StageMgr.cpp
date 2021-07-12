@@ -5,11 +5,12 @@
 #include "ObjMgr.h"
 #include "Circle_Monster.h"
 #include "Monster.h"
+#include "KeyMgr.h"
+#include "Player.h"
 
 CStageMgr* CStageMgr::m_pInstance = nullptr;
 CStageMgr::CStageMgr()
-	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0), m_bDoubleCheck(false)
-
+	:m_MonsterCnt{ 0 }, m_bClear(true), m_dwTime{ 0 }, m_eCurStage(0), m_fStage(0.f), m_pPlayer(nullptr), m_bDoubleCheck(false)
 {
 	ZeroMemory(myStage, sizeof(D3DXVECTOR3) * (X*Y));
 	ZeroMemory(m_bMonster, sizeof(bool) * (X*Y));
@@ -40,21 +41,51 @@ void CStageMgr::Initialize()
 
 void CStageMgr::Update()
 {
+	if (CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
+		Start_Again();
 	Check_Clear();
 	Start_Stage();
 }
 
+void CStageMgr::Start_Again()
+{
+	//if(CObjMgr::Get_Instance()->Get_List(OBJID::PLAYER).size() > 0)
+	//m_pPlayer = CObjMgr::Get_Instance()->Get_Player();
+	//else m_pPlayer = nullptr
+
+	if (m_pPlayer != nullptr)
+		return;
+
+	CObjMgr::Get_Instance()->Clear_List_For_Restart();
+	CObjMgr::Get_Instance()->Add_Object(CAbstractFactory<CPlayer>::Create(), OBJID::PLAYER);
+	m_fStage = 0.f;
+	m_bClear = false;
+
+}
+
 void CStageMgr::Start_Stage()
 {
+	if (CObjMgr::Get_Instance()->Get_List(OBJID::PLAYER).size() > 0) 
+		m_pPlayer = CObjMgr::Get_Instance()->Get_Player();
+	else m_pPlayer = nullptr;
+
+	if (m_pPlayer == nullptr) 
+		return;
+
 	if (m_bClear)
 	{
 		// debug
-		//m_eCurStage = 6;
+
+		m_eCurStage = 0;
 
 		m_eCurStage = rand() % 6;
+    
 		m_bClear = false;
+		m_fStage += 0.5f;
+		if (m_fStage > 5.f)
+			m_fStage = 5.f;
 	}
-
+  
 	switch (m_eCurStage)
 	{
 	case 0:
@@ -99,7 +130,8 @@ void CStageMgr::Start_Stage()
 	}
 }
 
-//void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 ±ÇÀå
+
+//void CStageMgr::Spawn_ButterFly_Left(int _Cnt, int _delay)		// delay 500 ï¿½ï¿½ï¿½ï¿½
 //{
 //	if (m_MonsterCnt[BUTTERFLY_LEFT] < _Cnt)
 //	{
@@ -171,6 +203,7 @@ void CStageMgr::Start_Stage()
 //	
 //}
 
+
 void CStageMgr::Spawn_ZigZag_Left(int _Cnt, int _delay)
 {
 
@@ -225,6 +258,7 @@ void CStageMgr::Spawn_Circle_Monster(int _Cnt, int _delay, float fX)
 		}
 	}
 }
+
 
 //void CStageMgr::Spawn_Monster_Left(int _Cnt, int _delay)
 //{

@@ -3,13 +3,12 @@
 #include "Obj.h"
 #include "ObjMgr.h"
 #include "Monster.h"
-
-
 #include "Butterfly.h"
 #include "Player.h"
 #include "StageMgr.h"
 #include "ZigZag.h"
 #include "Circle_Monster.h"
+#include "KeyMgr.h"
 
 #include <time.h>
 
@@ -53,14 +52,32 @@ void CMainGame::Render()
 {
 	RECT rc{ 0, 0, WINCX, WINCY };
 
-	Rectangle(m_hDC, rc.left, rc.top, rc.right, rc.bottom);
+	m_BackDC = CreateCompatibleDC(m_hDC);
+	m_backBit = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
+	m_oldBit = (HBITMAP)SelectObject(m_BackDC, m_backBit);
 
-	CObjMgr::Get_Instance()->Render(m_hDC);
+
+	Rectangle(m_BackDC, rc.left, rc.top, rc.right, rc.bottom);
+
+	CObjMgr::Get_Instance()->Render(m_BackDC);
+
+	BitBlt(m_hDC, 0, 0, WINCX, WINCY, m_BackDC, 0, 0, SRCCOPY);
+
+
+
 }
 
 void CMainGame::Release()
 {
 	CObjMgr::Destroy_Instance();
+	CStageMgr::Destroy_Instance();
+	CKeyMgr::Destroy_Instance();
+
+	SelectObject(m_BackDC, m_oldBit);
+	DeleteDC(m_BackDC);
+	DeleteObject(m_backBit);
 
 	ReleaseDC(g_hWnd, m_hDC);
+	
+
 }
