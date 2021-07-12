@@ -20,7 +20,9 @@ HRESULT CDeadEffect::Initialize()
 	m_tInfo.vSize = { 5.f, 5.f, 0.f };
 
 	m_fSpeed = 1.f;
+
 	m_fAngle = float(rand() % 360);
+
 
 	return S_OK;
 }

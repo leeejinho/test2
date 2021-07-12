@@ -8,7 +8,8 @@
 class CStageMgr
 {
 private:
-	enum { BUTTERFLY_LEFT, BUTTERFLY_RIGHT, ZIGZAG_LEFT, ZIGZAG_RIGHT, CIRCLE_MONSTER, MONSTER_LEFT, MONSTER_RIGHT, MONSTER_END };
+	enum ID { BUTTERFLY_LEFT, BUTTERFLY_RIGHT, ZIGZAG_LEFT, ZIGZAG_RIGHT, CIRCLE_MONSTER, MONSTER_LEFT, MONSTER_RIGHT, BUTTERFLY_LEFT_D,BUTTERFLY_RIGHT_D
+		, MONSTER_LEFT_D, MONSTER_RIGHT_D, MONSTER_END };
 private:
 	static CStageMgr* m_pInstance;
 private:
@@ -38,15 +39,16 @@ public:
 	void Update();
 
 public:
-	void Spawn_ButterFly_Left(int _Cnt, int _delay);
-	void Spawn_ButterFly_Right(int _Cnt, int _delay);
+	//void Spawn_ButterFly_Left(int _Cnt, int _delay);
+	//void Spawn_ButterFly_Right(int _Cnt, int _delay);
 	void Spawn_ZigZag_Left(int _Cnt, int _delay);
 	void Spawn_ZigZag_Right(int _Cnt, int _delay);
 	void Spawn_Circle_Monster(int _Cnt, int _delay, float fX);
-	void Spawn_Monster_Left(int _Cnt, int _delay);
-	void Spawn_Monster_Right(int _Cnt, int _delay);
+	//void Spawn_Monster_Left(int _Cnt, int _delay);
+	//void Spawn_Monster_Right(int _Cnt, int _delay);
 
 
+	void Spawn_Double(int _Cnt, int _delay, CStageMgr::ID _eID);				// 2줄 나오는 것만.
 
 	void Start_Again();
 	void Start_Stage();
@@ -58,7 +60,8 @@ public:
 public:
 	D3DXVECTOR3		    GetVec(int x, int y) { return myStage[x][y]; }
 	void				Set_Check(int x, int y) { m_bMonster[x][y] = true; }
-	bool				Check_Monster(int x, int y);				// �ڸ� ������� üũ�ϴ� �Լ�
+	bool				Check_Monster(int x, int y);				// 자리 비었는지 체크하는 함수
+
 
 private:
 	CObj*				m_pPlayer;
@@ -70,9 +73,10 @@ private:
 	int					m_MonsterCnt[MONSTER_END];
 	int					m_eCurStage;
 
+
+	bool				m_bDoubleCheck;			// 2줄인지 아닌지 체크
+
 	float				m_fStage;
-
-
 
 
 };
