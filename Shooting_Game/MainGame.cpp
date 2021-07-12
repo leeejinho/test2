@@ -25,8 +25,12 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
-	m_hDC = GetDC(g_hWnd);
 	srand(unsigned(time(NULL)));
+
+	m_hDC = GetDC(g_hWnd);
+	m_BackDC = CreateCompatibleDC(m_hDC);
+	m_backBit = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
+	m_oldBit = (HBITMAP)SelectObject(m_BackDC, m_backBit);
 
 
 	CObj* pObj = CAbstractFactory<CPlayer>::Create();
@@ -51,11 +55,6 @@ void CMainGame::Late_Update()
 void CMainGame::Render()
 {
 	RECT rc{ 0, 0, WINCX, WINCY };
-
-	m_BackDC = CreateCompatibleDC(m_hDC);
-	m_backBit = CreateCompatibleBitmap(m_hDC, WINCX, WINCY);
-	m_oldBit = (HBITMAP)SelectObject(m_BackDC, m_backBit);
-
 
 	Rectangle(m_BackDC, rc.left, rc.top, rc.right, rc.bottom);
 
