@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MonsterBullet.h"
 #include "ObjMgr.h"
+#include "StageMgr.h"
 
 CMonsterBullet::CMonsterBullet()
 {
@@ -21,7 +22,7 @@ HRESULT CMonsterBullet::Initialize()
 	D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
 	m_tInfo.vSize = { 10.f, 10.f, 0.f };
 
-	m_fSpeed = 5.f;
+	m_fSpeed = 4.5f + CStageMgr::Get_Instance()->Get_Stage();
 	
 
 	return S_OK;
