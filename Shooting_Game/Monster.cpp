@@ -281,11 +281,11 @@ void CMonster::Monster_Descent()
 				else
 					m_tInfo.vDir = { 0.f, 1.f, 0.f };
 				D3DXVec3Normalize(&m_tInfo.vDir, &m_tInfo.vDir);
-				while (iCount < 3)
+				for (int i = 0; i < 3; ++i)
 				{
 					CObj* pObj = CAbstractFactory<CMonsterBullet>::Create(m_tInfo.vPos.x, m_tInfo.vPos.y);
 					CObjMgr::Get_Instance()->Add_Object(pObj, OBJID::MONSTERBULLIT);
-					++iCount;
+				
 				}
 
 				m_bDescentRot = !m_bDescentRot;
